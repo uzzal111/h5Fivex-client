@@ -13,7 +13,11 @@ type ShareOption = {
   url: string;
 };
 
-export default function InvitePage({ onBack }: { onBack: () => void }) {
+type InvitePageProps = {
+  onBack: () => void;
+};
+
+export default function InvitePage({ onBack }: InvitePageProps) {
   const [copied, setCopied] = useState(false);
   const referralLink = "https://vipdashboard.com/ref/user123";
   const referralCode = "USER123";
@@ -25,33 +29,33 @@ export default function InvitePage({ onBack }: { onBack: () => void }) {
   ];
 
   const shareOptions: ShareOption[] = [
-    { 
-      platform: "WhatsApp", 
-      icon: <FaWhatsapp className="text-white" size={20} />, 
+    {
+      platform: "WhatsApp",
+      icon: <FaWhatsapp className="text-white" size={20} />,
       color: "bg-green-500 hover:bg-green-600",
       url: `https://wa.me/?text=${encodeURIComponent(`Join me on VIP Tasks and earn together! Use my code ${referralCode} or link: ${referralLink}`)}`
     },
-    { 
-      platform: "Telegram", 
-      icon: <FaTelegram className="text-white" size={20} />, 
+    {
+      platform: "Telegram",
+      icon: <FaTelegram className="text-white" size={20} />,
       color: "bg-blue-400 hover:bg-blue-500",
       url: `https://t.me/share/url?url=${encodeURIComponent(referralLink)}&text=${encodeURIComponent(`Use my VIP code: ${referralCode}`)}`
     },
-    { 
-      platform: "Facebook", 
-      icon: <FaFacebook className="text-white" size={20} />, 
+    {
+      platform: "Facebook",
+      icon: <FaFacebook className="text-white" size={20} />,
       color: "bg-blue-600 hover:bg-blue-700",
       url: `https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(referralLink)}&quote=${encodeURIComponent(`Join with my VIP code: ${referralCode}`)}`
     },
-    { 
-      platform: "Twitter", 
-      icon: <FaTwitter className="text-white" size={20} />, 
+    {
+      platform: "Twitter",
+      icon: <FaTwitter className="text-white" size={20} />,
       color: "bg-sky-400 hover:bg-sky-500",
       url: `https://twitter.com/intent/tweet?text=${encodeURIComponent(`Join VIP Tasks using my code ${referralCode} and earn together! ${referralLink}`)}`
     },
-    { 
-      platform: "LinkedIn", 
-      icon: <FaLinkedin className="text-white" size={20} />, 
+    {
+      platform: "LinkedIn",
+      icon: <FaLinkedin className="text-white" size={20} />,
       color: "bg-blue-700 hover:bg-blue-800",
       url: `https://www.linkedin.com/sharing/share-offsite/?url=${encodeURIComponent(referralLink)}`
     }
@@ -80,7 +84,6 @@ export default function InvitePage({ onBack }: { onBack: () => void }) {
   return (
     <div className="min-h-screen bg-gradient-to-br from-cyan-100 via-sky-200 to-blue-100 p-8">
       <Toaster position="top-center" />
-      
       <motion.div 
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
@@ -116,7 +119,7 @@ export default function InvitePage({ onBack }: { onBack: () => void }) {
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: index * 0.1 }}
-              className={` ${stat.color} rounded-xl p-4 text-center border border-white/10 shadow-md`}
+              className={`${stat.color} rounded-xl p-4 text-center border border-white/10 shadow-md`}
             >
               <div className="flex justify-center text-3xl mb-2">
                 {stat.icon}
