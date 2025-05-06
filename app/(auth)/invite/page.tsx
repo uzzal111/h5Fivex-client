@@ -6,12 +6,7 @@ import { FaWhatsapp, FaTelegram, FaFacebook, FaTwitter, FaLinkedin } from 'react
 import { motion, AnimatePresence } from 'framer-motion';
 import { Toaster, toast } from 'react-hot-toast';
 
-// PageProps type that allows other properties if needed
-type PageProps = {
-  [key: string]: any;
-};
-
-// ShareOption type for share buttons
+// Simplified type definitions
 type ShareOption = {
   platform: string;
   icon: JSX.Element;
@@ -19,7 +14,6 @@ type ShareOption = {
   url: string;
 };
 
-// Stats item type
 type StatItem = {
   value: number;
   label: string;
@@ -27,12 +21,7 @@ type StatItem = {
   color: string;
 };
 
-// InvitePageProps extends PageProps and includes the onBack function
-interface InvitePageProps extends PageProps {
-  onBack: () => void;
-}
-
-export default function InvitePage({ onBack }: InvitePageProps) {
+export default function InvitePage() {
   const [copied, setCopied] = useState(false);
   const referralLink = "https://vipdashboard.com/ref/user123";
   const referralCode = "USER123";
@@ -122,7 +111,6 @@ export default function InvitePage({ onBack }: InvitePageProps) {
               <motion.button 
                 whileHover={{ scale: 1.05 }}
                 whileTap={{ scale: 0.95 }}
-                onClick={onBack}
                 className="p-2 rounded-full hover:bg-white/20 transition"
               >
                 <FiArrowLeft size={20} />

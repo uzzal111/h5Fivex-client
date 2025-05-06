@@ -19,7 +19,7 @@ export default function AuthFooter() {
     { 
       icon: <FaHome />, 
       label: "Home", 
-      path: "",
+      path: "/dashboard",
       color: "from-blue-400 to-blue-600",
       inactiveColor: "text-blue-400"
     },
