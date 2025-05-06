@@ -16,7 +16,8 @@ type ShareOption = {
 
 // PageProps type can now be defined to have a more meaningful structure
 type PageProps = {
-  [key: string]: any;  // Allow additional props if needed
+  // Allow any properties for now or you can add more specific ones if needed
+  [key: string]: any;
 };
 
 // InvitePageProps extends PageProps but includes the onBack function
