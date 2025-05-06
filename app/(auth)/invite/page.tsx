@@ -6,6 +6,7 @@ import { FaWhatsapp, FaTelegram, FaFacebook, FaTwitter, FaLinkedin } from 'react
 import { motion, AnimatePresence } from 'framer-motion';
 import { Toaster, toast } from 'react-hot-toast';
 
+// ShareOption type for share buttons
 type ShareOption = {
   platform: string;
   icon: JSX.Element;
@@ -13,8 +14,14 @@ type ShareOption = {
   url: string;
 };
 
-type InvitePageProps = {
-  onBack: () => void;
+// PageProps type can now be defined to have a more meaningful structure
+type PageProps = {
+  [key: string]: any;  // Allow additional props if needed
+};
+
+// InvitePageProps extends PageProps but includes the onBack function
+type InvitePageProps = PageProps & {
+  onBack: () => void;  // Explicitly include onBack prop
 };
 
 export default function InvitePage({ onBack }: InvitePageProps) {
@@ -237,9 +244,9 @@ export default function InvitePage({ onBack }: InvitePageProps) {
             How It Works
           </h3>
           <ul className="space-y-3">
-            {[
-              "Share your referral link with friends",
-              "They sign up and make a deposit",
+            {[ 
+              "Share your referral link with friends", 
+              "They sign up and make a deposit", 
               "You earn 10% of their profits"
             ].map((step, index) => (
               <motion.li 
