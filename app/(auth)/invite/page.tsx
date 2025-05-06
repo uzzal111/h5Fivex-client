@@ -6,6 +6,11 @@ import { FaWhatsapp, FaTelegram, FaFacebook, FaTwitter, FaLinkedin } from 'react
 import { motion, AnimatePresence } from 'framer-motion';
 import { Toaster, toast } from 'react-hot-toast';
 
+// PageProps type that allows other properties if needed
+type PageProps = {
+  [key: string]: any;
+};
+
 // ShareOption type for share buttons
 type ShareOption = {
   platform: string;
@@ -14,16 +19,18 @@ type ShareOption = {
   url: string;
 };
 
-// PageProps type can now be defined to have a more meaningful structure
-type PageProps = {
-  // Allow any properties for now or you can add more specific ones if needed
-  [key: string]: any;
+// Stats item type
+type StatItem = {
+  value: number;
+  label: string;
+  icon: JSX.Element;
+  color: string;
 };
 
-// InvitePageProps extends PageProps but includes the onBack function
-type InvitePageProps = PageProps & {
-  onBack: () => void;  // Explicitly include onBack prop
-};
+// InvitePageProps extends PageProps and includes the onBack function
+interface InvitePageProps extends PageProps {
+  onBack: () => void;
+}
 
 export default function InvitePage({ onBack }: InvitePageProps) {
   const [copied, setCopied] = useState(false);
@@ -31,9 +38,19 @@ export default function InvitePage({ onBack }: InvitePageProps) {
   const referralCode = "USER123";
   const [activeShare, setActiveShare] = useState<string | null>(null);
 
-  const stats = [
-    { value: 12, label: "Friends Joined", icon: <FiUsers className="text-cyan-600" />, color: "bg-gradient-to-br from-cyan-200 to-cyan-300" },
-    { value: 56, label: "Total Earnings", icon: <FiDollarSign className="text-sky-600" />, color: "bg-gradient-to-br from-sky-200 to-sky-300" }
+  const stats: StatItem[] = [
+    { 
+      value: 12, 
+      label: "Friends Joined", 
+      icon: <FiUsers className="text-cyan-600" />, 
+      color: "bg-gradient-to-br from-cyan-200 to-cyan-300" 
+    },
+    { 
+      value: 56, 
+      label: "Total Earnings", 
+      icon: <FiDollarSign className="text-sky-600" />, 
+      color: "bg-gradient-to-br from-sky-200 to-sky-300" 
+    }
   ];
 
   const shareOptions: ShareOption[] = [
