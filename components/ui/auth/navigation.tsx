@@ -35,7 +35,7 @@ const Navigation = () => {
     { 
       name: 'Recharge', 
       icon: <MdAccountBalanceWallet />, 
-      path: '/recharge', 
+      path: '/deposit', 
       color: 'text-emerald-600',
       bg: 'bg-emerald-100'
     },
@@ -47,9 +47,9 @@ const Navigation = () => {
       bg: 'bg-rose-100'
     },
     { 
-      name: 'Company', 
+      name: 'Rank&Reward', 
       icon: <MdBusiness />, 
-      path: '/company', 
+      path: '/rank', 
       color: 'text-amber-600',
       bg: 'bg-amber-100'
     },

@@ -40,15 +40,15 @@ export default function AuthFooter() {
     },
     { 
       icon: <FaWallet />, 
-      label: "Wallet", 
-      path: "/wallet",
+      label: "Asset", 
+      path: "/asset",
       color: "from-amber-400 to-amber-600",
       inactiveColor: "text-amber-400"
     },
     { 
       icon: <FaUser />, 
       label: "Me", 
-      path: "/me",
+      path: "/profile",
       color: "from-rose-400 to-rose-600",
       inactiveColor: "text-rose-400"
     },
