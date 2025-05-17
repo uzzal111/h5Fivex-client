@@ -23,7 +23,6 @@ export interface Product {
   image: string;
   gif: string; // Using 'gif' consistently instead of 'tv'
   category: string;
-  tv: string;
 }
 
 export interface ProductImages {

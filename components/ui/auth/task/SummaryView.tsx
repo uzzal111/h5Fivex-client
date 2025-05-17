@@ -39,7 +39,7 @@ export const SummaryView: React.FC<SummaryViewProps> = ({
     >
      <div className="relative h-40 md:h-64 overflow-hidden rounded-lg mb-4 md:mb-6 bg-gradient-to-r from-blue-50 to-purple-50">
   <img
-    src={selectedProduct?.tv || DEFAULT_PRODUCT_GIF}
+    src={selectedProduct?.gif || DEFAULT_PRODUCT_GIF}
     className="w-full h-full object-cover"
     alt="Product Preview"
     onError={(e) => {
