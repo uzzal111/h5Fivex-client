@@ -7,6 +7,7 @@ import FAQ from '@/components/ui/home/Faq';
 import Partners from '@/components/ui/home/Partners';
 import Conference from '@/components/ui/home/confernce';
 import TaskRecordComponent from '@/components/ui/home/taskrecord';
+import CrispChat from '@/components/ui/auth/crisp';
 
 export default function Home() {
 	return (
@@ -20,7 +21,7 @@ export default function Home() {
 			<Testimonials></Testimonials>
 			<FAQ></FAQ>
 			<Partners></Partners>
-			
+			<CrispChat></CrispChat>
 			
 		</HomeLayout>
 	);

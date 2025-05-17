@@ -21,62 +21,72 @@ const productImages: ProductImages = {
   tv: 'https://images.unsplash.com/photo-1593784991095-a205069470b6?ixlib=rb-1.2.1&auto=format&fit=crop&w=600&q=80',
   speaker: 'https://images.unsplash.com/photo-1572569511254-d8f925fe2cbb?ixlib=rb-1.2.1&auto=format&fit=crop&w=600&q=80',
   headphones: 'https://images.unsplash.com/photo-1505740420928-5e560c06d30e?ixlib=rb-1.2.1&auto=format&fit=crop&w=600&q=80',
+  laptop: 'https://images.unsplash.com/photo-1593642632823-8f785ba67e45?ixlib=rb-1.2.1&auto=format&fit=crop&w=600&q=80',
+  smartphone: 'https://images.unsplash.com/photo-1592899677977-9c10ca588bbd?ixlib=rb-1.2.1&auto=format&fit=crop&w=600&q=80',
+  watch: 'https://images.unsplash.com/photo-1523275335684-37898b6baf30?ixlib=rb-1.2.1&auto=format&fit=crop&w=600&q=80',
+  camera: 'https://images.unsplash.com/photo-1516035069371-29a1b244cc32?ixlib=rb-1.2.1&auto=format&fit=crop&w=600&q=80',
+  tablet: 'https://images.unsplash.com/photo-1546054454-aa26e2b734c7?ixlib=rb-1.2.1&auto=format&fit=crop&w=600&q=80',
   tvGif: 'https://i.giphy.com/media/3o7aD2d7hy9ktXNDP2/giphy.webp',
   speakerGif: 'https://i.giphy.com/media/3o7abB06u9bNzA8lu8/giphy.webp',
-  headphonesGif: 'https://i.giphy.com/media/l378zKVk7Eh3yHoJi/giphy.webp'
+  headphonesGif: 'https://i.giphy.com/media/l378zKVk7Eh3yHoJi/giphy.webp',
+  laptopGif: 'https://i.giphy.com/media/3oKIPsx2VAYAgEHC12/giphy.webp',
+  smartphoneGif: 'https://i.giphy.com/media/3o6Zt6ML6BklcajjsA/giphy.webp',
+  watchGif: 'https://i.giphy.com/media/3o7TKsQ8UQ0Z8vZQ7m/giphy.webp',
+  cameraGif: 'https://i.giphy.com/media/3o7TKsQ8UQ0Z8vZQ7m/giphy.webp',
+  tabletGif: 'https://i.giphy.com/media/3o7TKsQ8UQ0Z8vZQ7m/giphy.webp'
 };
 
 const vipTiers: VipTier[] = [
   {
     level: 'VIP1',
-    commission: '1.2%-2.4%',
-    orders: 3,  // 3 tasks for VIP1
-    requirement: 35,
+    commission: '1.80%-2.20%',
+    orders: 3,
+    requirement: 30,
     logo: <FaMedal className="text-amber-400" />,
     color: 'from-amber-100 to-amber-50',
     bgColor: 'bg-amber-50'
   },
   {
     level: 'VIP2',
-    commission: '1.8%-3.3%',
-    orders: 4,  // 4 tasks for VIP2
-    requirement: 300,
+    commission: '2.20%-2.80%',
+    orders: 4,
+    requirement: 200,
     logo: <FaMedal className="text-gray-400" />,
     color: 'from-gray-100 to-gray-50',
     bgColor: 'bg-gray-50'
   },
   {
     level: 'VIP3',
-    commission: '3%-3.8%',
-    orders: 5,  // 5 tasks for VIP3
-    requirement: 3000,
+    commission: '2.80%-3.20%',
+    orders: 5,
+    requirement: 300,
     logo: <FaMedal className="text-amber-600" />,
     color: 'from-orange-100 to-amber-50',
     bgColor: 'bg-amber-50'
   },
   {
     level: 'VIP4',
-    commission: '3.8%-4.3%',
-    orders: 6,  // 6 tasks for VIP4
-    requirement: 10000,
+    commission: '3.20%-3.60%',
+    orders: 6,
+    requirement: 400,
     logo: <FaTrophy className="text-yellow-500" />,
     color: 'from-yellow-100 to-yellow-50',
     bgColor: 'bg-yellow-50'
   },
   {
     level: 'VIP5',
-    commission: '3%-4.8%',
-    orders: 7,  // 7 tasks for VIP5
-    requirement: 30000,
+    commission: '3.60%-4%',
+    orders: 7,
+    requirement: 500,
     logo: <FaGem className="text-blue-400" />,
     color: 'from-blue-100 to-blue-50',
     bgColor: 'bg-blue-50'
   },
   {
     level: 'VIP6',
-    commission: '5.3%-8%',
-    orders: 8,  // 8 tasks for VIP6
-    requirement: 100000,
+    commission: '5%-8%',
+    orders: 8,
+    requirement: 600,
     logo: <FaCrown className="text-purple-500" />,
     color: 'from-purple-100 to-purple-50',
     bgColor: 'bg-purple-50'
@@ -92,7 +102,7 @@ const products: Product[] = [
     refund: '$999.99',
     commission: '$0.99',
     image: productImages.tv,
-    tv: productImages.tvGif,
+    gif: productImages.tvGif,
     category: 'Electronics'
   },
   {
@@ -103,7 +113,7 @@ const products: Product[] = [
     refund: '$149.99',
     commission: '$0.45',
     image: productImages.speaker,
-    tv: productImages.speakerGif,
+    gif: productImages.speakerGif,
     category: 'Audio'
   },
   {
@@ -114,8 +124,63 @@ const products: Product[] = [
     refund: '$199.99',
     commission: '$0.75',
     image: productImages.headphones,
-    tv: productImages.headphonesGif,
+    gif: productImages.headphonesGif,
     category: 'Audio'
+  },
+  {
+    id: 4,
+    name: 'Ultra Slim Laptop',
+    brand: 'Apple',
+    price: '$1299.00',
+    refund: '$1299.99',
+    commission: '$1.25',
+    image: productImages.laptop,
+    gif: productImages.laptopGif,
+    category: 'Computers'
+  },
+  {
+    id: 5,
+    name: 'Flagship Smartphone',
+    brand: 'iPhone',
+    price: '$1099.00',
+    refund: '$1099.99',
+    commission: '$1.10',
+    image: productImages.smartphone,
+    gif: productImages.smartphoneGif,
+    category: 'Mobile'
+  },
+  {
+    id: 6,
+    name: 'Smart Watch Pro',
+    brand: 'Apple',
+    price: '$399.00',
+    refund: '$399.99',
+    commission: '$0.60',
+    image: productImages.watch,
+    gif: productImages.watchGif,
+    category: 'Wearables'
+  },
+  {
+    id: 7,
+    name: 'DSLR Camera',
+    brand: 'Canon',
+    price: '$799.00',
+    refund: '$799.99',
+    commission: '$0.85',
+    image: productImages.camera,
+    gif: productImages.cameraGif,
+    category: 'Photography'
+  },
+  {
+    id: 8,
+    name: 'Premium Tablet',
+    brand: 'Samsung',
+    price: '$599.00',
+    refund: '$599.99',
+    commission: '$0.70',
+    image: productImages.tablet,
+    gif: productImages.tabletGif,
+    category: 'Tablets'
   }
 ];
 
@@ -123,13 +188,14 @@ export default function TaskPage() {
   const [view, setView] = useState<ViewType>('vip');
   const [selectedProduct, setSelectedProduct] = useState<Product | null>(null);
   const [taskCount, setTaskCount] = useState(0);
-  const [maxTasks, setMaxTasks] = useState(3); // Default to VIP1 tasks
+  const [maxTasks, setMaxTasks] = useState(3);
   const [deposit, setDeposit] = useState(0);
   const [totalProfit, setTotalProfit] = useState(0);
   const [todayProfit, setTodayProfit] = useState(0);
   const [isAnimating, setIsAnimating] = useState(false);
   const [showDepositModal, setShowDepositModal] = useState(false);
   const [depositAmount, setDepositAmount] = useState<string>('');
+  const [usedProductIds, setUsedProductIds] = useState<number[]>([]);
 
   useEffect(() => {
     const reset = setInterval(() => {
@@ -137,12 +203,12 @@ export default function TaskPage() {
       if (now.getHours() === 0 && now.getMinutes() === 0) {
         setTaskCount(0);
         setTodayProfit(0);
+        setUsedProductIds([]); // Reset used products at midnight
       }
     }, 60000);
     return () => clearInterval(reset);
   }, []);
 
-  // Update maxTasks when VIP level changes
   useEffect(() => {
     if (view === 'summary') {
       const currentTier = vipTiers.find(tier => deposit >= tier.requirement);
@@ -191,10 +257,30 @@ export default function TaskPage() {
     );
   };
 
+  const getRandomProduct = (): Product => {
+    // Filter out used products
+    const availableProducts = products.filter(product => !usedProductIds.includes(product.id));
+    
+    // If all products have been used, reset the used products list
+    if (availableProducts.length === 0) {
+      setUsedProductIds([]);
+      return products[Math.floor(Math.random() * products.length)];
+    }
+    
+    // Get a random product from available ones
+    const randomIndex = Math.floor(Math.random() * availableProducts.length);
+    const selected = availableProducts[randomIndex];
+    
+    // Mark this product as used
+    setUsedProductIds(prev => [...prev, selected.id]);
+    
+    return selected;
+  };
+
   const startPreview = () => {
     setIsAnimating(true);
     setTimeout(() => {
-      const product = products[Math.floor(Math.random() * products.length)];
+      const product = getRandomProduct();
       setSelectedProduct(product);
       setView('preview');
       setIsAnimating(false);

@@ -1,27 +1,13 @@
 import React from 'react';
 import { motion } from 'framer-motion';
 import { FiArrowLeft, FiDollarSign } from 'react-icons/fi';
-
-interface Product {
-  id: number;
-  name: string;
-  brand: string;
-  price: string;
-  refund: string;
-  commission: string;
-  image: string;
-  tv: string;
-  category: string;
-}
-
-// Define a type for all possible view states
-type ViewType = 'vip' | 'summary' | 'preview' | 'grab' | 'result';
+import { Product, ViewType } from './types'; // Import from your types file
 
 interface ResultViewProps {
   selectedProduct: Product;
   taskCount: number;
   maxTasks: number;
-  setView: (view: ViewType) => void; // Updated to use ViewType instead of string
+  setView: (view: ViewType) => void;
   handleImageError: (e: React.SyntheticEvent<HTMLImageElement, Event>) => void;
 }
 
@@ -60,7 +46,7 @@ export const ResultView: React.FC<ResultViewProps> = ({
         className="relative group mb-4 md:mb-6"
       >
         <img 
-          src={selectedProduct.image} 
+          src={selectedProduct.gif} // Changed from image to gif for animation
           alt={selectedProduct.name} 
           className="w-full h-40 md:h-48 object-contain rounded-lg border-2 border-white shadow-md mx-auto bg-white"
           onError={handleImageError}

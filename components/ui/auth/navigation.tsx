@@ -47,9 +47,9 @@ const Navigation = () => {
       bg: 'bg-rose-100'
     },
     { 
-      name: 'Rank&Reward', 
+      name: 'Company', 
       icon: <MdBusiness />, 
-      path: '/rank', 
+      path: '/company', 
       color: 'text-amber-600',
       bg: 'bg-amber-100'
     },
@@ -68,9 +68,9 @@ const Navigation = () => {
       bg: 'bg-pink-100'
     },
     { 
-      name: 'Task', 
+      name: 'Rank & Reward', 
       icon: <MdAssignment />, 
-      path: '/tasks', 
+      path: '/rank', 
       color: 'text-teal-600',
       bg: 'bg-teal-100'
     },

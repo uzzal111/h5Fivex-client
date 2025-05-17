@@ -4,6 +4,7 @@ import Navigation from '@/components/ui/auth/navigation';
 import TaskRecordComponent from '@/components/ui/home/taskrecord';
 import Partners from '@/components/ui/home/Partners';
 import HomeFooter from '@/components/ui/home/Fotter';
+import DashboardModal from '@/components/ui/home/dashboardmodel';
 
 const DashboardPage = () => {
 	return (
@@ -14,6 +15,7 @@ const DashboardPage = () => {
 			<TaskRecordComponent></TaskRecordComponent>
 			<Partners></Partners>
 			<HomeFooter></HomeFooter>
+			<DashboardModal></DashboardModal>
 			</div>
 		
 	);

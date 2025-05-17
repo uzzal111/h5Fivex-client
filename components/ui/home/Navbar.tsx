@@ -18,8 +18,8 @@ const HomeNavbar = () => {
       <div className="max-w-7xl mx-auto flex justify-between items-center">
         {/* Logo */}
         <div className="flex items-center gap-3">
-          <Image src="/home/logo.png" alt="Bitnex Logo" width={40} height={40} />
-          <span className="text-lg font-bold text-gray-800 tracking-wide">BITNEXECOMMERCE</span>
+          <Image src="/home/logo.png" alt="Bitnex Logo" width={50} height={60} />
+          <span className="text-lg font-bold text-gray-800 tracking-wide">h5Fivex</span>
         </div>
 
         {/* Desktop Join Button */}

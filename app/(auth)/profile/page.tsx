@@ -32,10 +32,9 @@ const ProfilePage = () => {
     availableFunds: 278.06,
     todayEarnings: 6.64,
     teamCommissions: 91.88,
+    yesterdayTeamCommissions: 45.32,
+    totalTeamCommissions: 320.45,
     vipChannel: 'VIP1Channel',
-    connections: 28,
-    teamMembers: 169,
-    comments: 169
   };
 
   const transactionHistory = [
@@ -136,15 +135,27 @@ const ProfilePage = () => {
               />
               <AssetDetailCard 
                 icon={<FiUsers className="text-indigo-500" />}
-                label="Team Commissions"
+                label="Today Team Commissions"
                 value={`${userData.teamCommissions.toFixed(2)} USDT`}
                 bgColor="bg-indigo-50"
               />
               <AssetDetailCard 
-                icon={<FiDollarSign className="text-teal-500" />}
+                icon={<FiUsers className="text-teal-500" />}
+                label="Yesterday Team Commissions"
+                value={`${userData.yesterdayTeamCommissions.toFixed(2)} USDT`}
+                bgColor="bg-teal-50"
+              />
+              <AssetDetailCard 
+                icon={<FiDollarSign className="text-blue-500" />}
                 label="Total Earnings"
                 value={`${userData.totalEarnings.toFixed(2)} USDT`}
-                bgColor="bg-teal-50"
+                bgColor="bg-blue-50"
+              />
+              <AssetDetailCard 
+                icon={<FiUsers className="text-purple-500" />}
+                label="Total Team Commissions"
+                value={`${userData.totalTeamCommissions.toFixed(2)} USDT`}
+                bgColor="bg-purple-50"
               />
             </div>
           </div>
@@ -293,8 +304,9 @@ const ProfilePage = () => {
             </div>
           </div>
 
-          {/* Balance Card */}
+          {/* Enhanced Balance Card */}
           <div className="bg-gradient-to-r from-blue-500 to-purple-600 rounded-xl p-5 text-white mt-6 mb-6 shadow-lg">
+            {/* Total Balance Section */}
             <div className="flex justify-between items-center mb-4">
               <span className="text-sm font-medium">Total Balance (USDT)</span>
               <div className="flex space-x-2">
@@ -308,19 +320,63 @@ const ProfilePage = () => {
             </div>
             <h2 className="text-3xl font-bold mb-6">{userData.balance.toFixed(2)}</h2>
             
-            <div className="grid grid-cols-2 gap-3">
-              <StatCard icon={<FiTrendingUp className="text-blue-200" />} label="Yesterday" value={userData.yesterdayEarnings} />
-              <StatCard icon={<FiClock className="text-purple-200" />} label="Pending" value={userData.pendingFunds} />
-              <StatCard icon={<FiPieChart className="text-blue-200" />} label="Total Earned" value={userData.totalEarnings} />
-              <StatCard icon={<FiDollarSign className="text-purple-200" />} label="Available" value={userData.availableFunds} />
+            {/* Earnings Breakdown */}
+            <div className="mb-4">
+              <h3 className="text-xs font-medium uppercase tracking-wider mb-2 opacity-80">Earnings Breakdown</h3>
+              <div className="grid grid-cols-2 gap-3 mb-3">
+                <StatCard 
+                  icon={<FiClock className="text-blue-200" />} 
+                  label="Today" 
+                  value={userData.todayEarnings} 
+                  highlight={true}
+                />
+                <StatCard 
+                  icon={<FiClock className="text-purple-200" />} 
+                  label="Yesterday" 
+                  value={userData.yesterdayEarnings} 
+                />
+              </div>
+              <div className="grid grid-cols-2 gap-3">
+                <StatCard 
+                  icon={<FiUsers className="text-blue-200" />} 
+                  label="Today Team" 
+                  value={userData.teamCommissions} 
+                  highlight={true}
+                />
+                <StatCard 
+                  icon={<FiUsers className="text-purple-200" />} 
+                  label="Yesterday Team" 
+                  value={userData.yesterdayTeamCommissions} 
+                />
+              </div>
             </div>
-          </div>
-
-          {/* Social Stats */}
-          <div className="flex justify-around text-center border-t border-gray-100 pt-4">
-            <SocialStat icon={<FiUser className="text-blue-500" />} count={userData.connections} label="Connections" />
-            <SocialStat icon={<FiUsers className="text-purple-500" />} count={userData.teamMembers} label="Team" />
-            <SocialStat icon={<FiMessageSquare className="text-indigo-500" />} count={userData.comments} label="Comments" />
+            
+            {/* Financial Metrics */}
+            <div className="border-t border-white/10 pt-3">
+              <h3 className="text-xs font-medium uppercase tracking-wider mb-2 opacity-80">Financial Metrics</h3>
+              <div className="grid grid-cols-2 gap-3">
+                <StatCard 
+                  icon={<FiPieChart className="text-blue-200" />} 
+                  label="Total Earned" 
+                  value={userData.totalEarnings} 
+                />
+                <StatCard 
+                  icon={<FiUsers className="text-purple-200" />} 
+                  label="Total Team" 
+                  value={userData.totalTeamCommissions} 
+                />
+                <StatCard 
+                  icon={<FiDollarSign className="text-blue-200" />} 
+                  label="Available" 
+                  value={userData.availableFunds} 
+                />
+                <StatCard 
+                  icon={<FiClock className="text-purple-200" />} 
+                  label="Pending" 
+                  value={userData.pendingFunds} 
+                />
+              </div>
+            </div>
           </div>
         </div>
 
@@ -349,12 +405,6 @@ const ProfilePage = () => {
             label="Login Password"
             active={activeTab === 'login-password'}
             onClick={() => setActiveTab('login-password')}
-          />
-          <TabButton 
-            icon={<FiKey className="text-gray-600" />}
-            label="Withdrawal Password"
-            active={activeTab === 'withdrawal-password'}
-            onClick={() => setActiveTab('withdrawal-password')}
           />
         </div>
 
@@ -398,14 +448,21 @@ const ProfilePage = () => {
   );
 };
 
-// Reusable Components
-const StatCard = ({ icon, label, value }: { icon: React.ReactNode; label: string; value: number }) => (
-  <div className="bg-white/10 p-2.5 rounded-lg backdrop-blur-sm">
+// Enhanced StatCard component with highlight option
+const StatCard = ({ icon, label, value, highlight = false }: { 
+  icon: React.ReactNode; 
+  label: string; 
+  value: number;
+  highlight?: boolean;
+}) => (
+  <div className={`${highlight ? 'bg-white/20' : 'bg-white/10'} p-2.5 rounded-lg backdrop-blur-sm`}>
     <div className="flex items-center text-xs mb-1">
       <span className="mr-1.5">{icon}</span>
       <span className="font-medium">{label}</span>
     </div>
-    <span className="font-bold text-sm">{value.toFixed(2)}</span>
+    <span className={`font-bold text-sm ${highlight ? 'text-white' : 'text-white/90'}`}>
+      {value.toFixed(2)}
+    </span>
   </div>
 );
 

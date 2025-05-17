@@ -21,7 +21,7 @@ export interface Product {
   refund: string;
   commission: string;
   image: string;
-  tv: string;
+  gif: string; // Using 'gif' consistently instead of 'tv'
   category: string;
 }
 
@@ -29,7 +29,17 @@ export interface ProductImages {
   tv: string;
   speaker: string;
   headphones: string;
+  laptop: string;
+  smartphone: string;
+  watch: string;
+  camera: string;
+  tablet: string;
   tvGif: string;
   speakerGif: string;
   headphonesGif: string;
+  laptopGif: string;
+  smartphoneGif: string;
+  watchGif: string;
+  cameraGif: string;
+  tabletGif: string;
 }
