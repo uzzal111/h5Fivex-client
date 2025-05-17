@@ -16,8 +16,8 @@ const geistMono = localFont({
 });
 
 export const metadata: Metadata = {
-	title: 'Bitnex',
-	description: 'BitnexEcommerce',
+	title: 'h5Fivex',
+	description: 'H5FivexEcommerce',
 };
 
 export default function RootLayout({
