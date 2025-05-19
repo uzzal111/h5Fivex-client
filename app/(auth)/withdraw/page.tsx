@@ -14,7 +14,7 @@ export default function WithdrawPage() {
   const [copied, setCopied] = useState(false);
 
   const minWithdraw = 30;
-  const fee = 1; // $1 withdrawal fee
+  const fee = 5; // $1 withdrawal fee
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
@@ -247,47 +247,61 @@ export default function WithdrawPage() {
               </motion.form>
             )}
 
-            {/* Important Notes */}
-            <motion.div 
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              transition={{ delay: 0.4 }}
-              className="mt-8 p-5 bg-indigo-50/50 rounded-xl border border-indigo-100"
-            >
-              <h4 className="text-sm font-medium text-indigo-800 flex items-center mb-3">
-                <FiInfo className="mr-2 text-indigo-600" /> Important Notes
-              </h4>
-              <ul className="text-xs text-indigo-700 space-y-2">
-                <motion.li 
-                  whileHover={{ x: 5 }}
-                  className="flex items-start"
-                >
-                  <span className="text-indigo-600 mr-2">•</span>
-                  <span>Minimum withdrawal: <span className="font-semibold">${minWithdraw} USDT</span></span>
-                </motion.li>
-                <motion.li 
-                  whileHover={{ x: 5 }}
-                  className="flex items-start"
-                >
-                  <span className="text-indigo-600 mr-2">•</span>
-                  <span>Network fee: <span className="font-semibold">${fee}</span> will be deducted</span>
-                </motion.li>
-                <motion.li 
-                  whileHover={{ x: 5 }}
-                  className="flex items-start"
-                >
-                  <span className="text-indigo-600 mr-2">•</span>
-                  <span>Processing time: <span className="font-semibold">5-30 minutes</span></span>
-                </motion.li>
-                <motion.li 
-                  whileHover={{ x: 5 }}
-                  className="flex items-start"
-                >
-                  <span className="text-indigo-600 mr-2">•</span>
-                  <span>Double check your <span className="font-semibold">{network} address</span></span>
-                </motion.li>
-              </ul>
-            </motion.div>
+            {/* Important Notes - Enhanced Version */}
+<motion.div 
+  initial={{ opacity: 0, y: 20 }}
+  animate={{ opacity: 1, y: 0 }}
+  transition={{ delay: 0.4 }}
+  className="mt-8 bg-white rounded-xl border border-gray-200 overflow-hidden shadow-sm"
+>
+  <div className="bg-gradient-to-r from-indigo-50 to-purple-50 px-5 py-3 border-b border-gray-200 flex items-center">
+    <FiInfo className="text-indigo-600 mr-2" />
+    <h4 className="text-sm font-semibold text-indigo-800">Withdrawal Guidelines</h4>
+  </div>
+  <div className="p-4 space-y-3">
+    <div className="flex items-start">
+      <div className="flex-shrink-0 h-5 w-5 rounded-full bg-indigo-100 flex items-center justify-center mr-3 mt-0.5">
+        <span className="text-indigo-600 text-xs font-bold">1</span>
+      </div>
+      <div>
+        <p className="text-sm font-medium text-gray-800">Minimum Withdrawal</p>
+        <p className="text-xs text-gray-600">${minWithdraw} USDT required for all withdrawals</p>
+      </div>
+    </div>
+    
+    <div className="flex items-start">
+      <div className="flex-shrink-0 h-5 w-5 rounded-full bg-purple-100 flex items-center justify-center mr-3 mt-0.5">
+        <span className="text-purple-600 text-xs font-bold">2</span>
+      </div>
+      <div>
+        <p className="text-sm font-medium text-gray-800">Network Fees</p>
+        <p className="text-xs text-gray-600">${fee} flat fee applies to all {network} transactions</p>
+      </div>
+    </div>
+    
+    <div className="flex items-start">
+      <div className="flex-shrink-0 h-5 w-5 rounded-full bg-blue-100 flex items-center justify-center mr-3 mt-0.5">
+        <span className="text-blue-600 text-xs font-bold">3</span>
+      </div>
+      <div>
+        <p className="text-sm font-medium text-gray-800">Processing Time</p>
+        <p className="text-xs text-gray-600">Typically completes within 5-30 minutes</p>
+      </div>
+    </div>
+    
+    <div className="flex items-start">
+      <div className="flex-shrink-0 h-5 w-5 rounded-full bg-amber-100 flex items-center justify-center mr-3 mt-0.5">
+        <span className="text-amber-600 text-xs font-bold">!</span>
+      </div>
+      <div>
+        <p className="text-sm font-medium text-gray-800">Address Verification</p>
+        <p className="text-xs text-gray-600">
+          Ensure your {network} address is correct. Transactions cannot be reversed.
+        </p>
+      </div>
+    </div>
+  </div>
+</motion.div>
           </div>
         </div>
       </motion.div>

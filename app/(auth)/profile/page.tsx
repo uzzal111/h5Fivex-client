@@ -6,7 +6,8 @@ import {
   FiUser, FiDollarSign, FiCreditCard, FiClock, 
   FiPieChart, FiTrendingUp, FiUsers, FiMessageSquare,
   FiSettings, FiLogOut, FiChevronRight, FiCheckCircle,
-  FiEdit, FiUpload, FiImage, FiLock, FiKey
+  FiEdit, FiUpload, FiImage, FiLock, FiKey, FiDownload,
+  FiSmartphone, 
 } from 'react-icons/fi';
 
 const ProfilePage = () => {
@@ -42,6 +43,11 @@ const ProfilePage = () => {
     { id: 2, type: 'Withdrawal', amount: -50.00, date: '2025-05-08', status: 'Completed' },
     { id: 3, type: 'Commission', amount: 12.50, date: '2025-05-07', status: 'Completed' },
   ];
+
+  const appDownloadLinks = {
+    android: 'https://play.google.com/store/apps/details?id=com.example.app',
+    
+  };
 
   const handleImageUpload = (e: React.ChangeEvent<HTMLInputElement>) => {
     const file = e.target.files?.[0];
@@ -260,6 +266,77 @@ const ProfilePage = () => {
             </form>
           </div>
         );
+      case 'app-download':
+        return (
+          <div className="bg-white rounded-xl shadow-sm p-6 mt-4">
+            <h3 className="font-bold text-lg mb-6 text-gray-800 flex items-center">
+              <FiSmartphone className="mr-2 text-blue-500" />
+              Download Our Mobile App
+            </h3>
+            
+            <div className="bg-gradient-to-r from-blue-50 to-indigo-50 rounded-xl p-5 mb-6 border border-blue-100">
+              <div className="flex items-center mb-4">
+                <div className="bg-blue-100 p-3 rounded-lg mr-4">
+                  <FiSmartphone className="text-blue-600 text-2xl" />
+                </div>
+                <div>
+                  <h4 className="font-bold text-gray-800">Better Experience on Mobile</h4>
+                  <p className="text-sm text-gray-600">Trade anytime, anywhere with our app</p>
+                </div>
+              </div>
+              
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                {/* QR Code Section */}
+                
+                
+                {/* Download Buttons */}
+                <div className="space-y-3">
+                  <a 
+                    href={appDownloadLinks.android} 
+                    target="_blank" 
+                    rel="noopener noreferrer"
+                    className="flex items-center justify-between p-3 bg-gray-800 rounded-lg hover:bg-gray-700 transition"
+                  >
+                    <div className="flex items-center">
+                      <div className="bg-white/10 p-1.5 rounded mr-3">
+                      </div>
+                      <div>
+                        <p className="text-xs text-gray-300">Download on</p>
+                        <p className="font-medium text-white">Android app</p>
+                      </div>
+                    </div>
+                    <FiDownload className="text-white" />
+                  </a>
+                </div>
+              </div>
+            </div>
+            
+            <div className="bg-gray-50 rounded-lg p-4 border border-gray-200">
+              <h4 className="font-medium text-gray-800 mb-2 flex items-center">
+                <FiCheckCircle className="text-green-500 mr-2" />
+                App Features
+              </h4>
+              <ul className="text-sm text-gray-600 space-y-2">
+                <li className="flex items-start">
+                  <span className="text-green-500 mr-2">✓</span>
+                  Real-time trading and notifications
+                </li>
+                <li className="flex items-start">
+                  <span className="text-green-500 mr-2">✓</span>
+                  Secure biometric authentication
+                </li>
+                <li className="flex items-start">
+                  <span className="text-green-500 mr-2">✓</span>
+                  Faster deposits and withdrawals
+                </li>
+                <li className="flex items-start">
+                  <span className="text-green-500 mr-2">✓</span>
+                  Exclusive mobile-only promotions
+                </li>
+              </ul>
+            </div>
+          </div>
+        );
       default:
         return null;
     }
@@ -406,6 +483,12 @@ const ProfilePage = () => {
             active={activeTab === 'login-password'}
             onClick={() => setActiveTab('login-password')}
           />
+          <TabButton 
+            icon={<FiDownload className="text-gray-600" />}
+            label="Download App"
+            active={activeTab === 'app-download'}
+            onClick={() => setActiveTab('app-download')}
+          />
         </div>
 
         {/* Tab Content */}
@@ -463,16 +546,6 @@ const StatCard = ({ icon, label, value, highlight = false }: {
     <span className={`font-bold text-sm ${highlight ? 'text-white' : 'text-white/90'}`}>
       {value.toFixed(2)}
     </span>
-  </div>
-);
-
-const SocialStat = ({ icon, count, label }: { icon: React.ReactNode; count: number; label: string }) => (
-  <div className="px-2 py-1">
-    <div className="flex items-center justify-center mb-1">
-      {icon}
-      <span className="ml-1.5 text-sm font-medium text-gray-800">{count}</span>
-    </div>
-    <span className="text-xs text-gray-500">{label}</span>
   </div>
 );
 

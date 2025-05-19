@@ -59,7 +59,7 @@ const vipTiers: VipTier[] = [
     level: 'VIP3',
     commission: '2.80%-3.20%',
     orders: 3,
-    requirement: 1000,
+    requirement: 2000,
     logo: <FaMedal className="text-amber-600" />,
     color: 'from-orange-100 to-amber-50',
     bgColor: 'bg-amber-50'
@@ -68,7 +68,7 @@ const vipTiers: VipTier[] = [
     level: 'VIP4',
     commission: '3.20%-3.60%',
     orders: 3,
-    requirement: 1500,
+    requirement: 5000,
     logo: <FaTrophy className="text-yellow-500" />,
     color: 'from-yellow-100 to-yellow-50',
     bgColor: 'bg-yellow-50'
@@ -77,7 +77,7 @@ const vipTiers: VipTier[] = [
     level: 'VIP5',
     commission: '3.60%-4%',
     orders: 3,
-    requirement: 2000,
+    requirement: 10000,
     logo: <FaGem className="text-blue-400" />,
     color: 'from-blue-100 to-blue-50',
     bgColor: 'bg-blue-50'
@@ -86,7 +86,7 @@ const vipTiers: VipTier[] = [
     level: 'VIP6',
     commission: '5%-8%',
     orders: 3,
-    requirement: 3000,
+    requirement: 20000,
     logo: <FaCrown className="text-purple-500" />,
     color: 'from-purple-100 to-purple-50',
     bgColor: 'bg-purple-50'

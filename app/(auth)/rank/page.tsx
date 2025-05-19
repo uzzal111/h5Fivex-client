@@ -1,6 +1,6 @@
 'use client';
 
-import React from 'react';
+import React, { useState } from 'react';
 import { 
   FiAward,
   FiUsers,
@@ -10,7 +10,9 @@ import {
   FiGift,
   FiTrendingUp,
   FiUserCheck,
-  FiBarChart2
+  FiBarChart2,
+  FiCalendar,
+  FiDownload
 } from 'react-icons/fi';
 import { motion } from 'framer-motion';
 
@@ -24,86 +26,78 @@ interface RewardTier {
   completed: boolean;
   icon: React.ReactNode;
   color: string;
+  monthlySalary?: string;
+  isClaimable?: boolean;
 }
 
 const RankRewardPage = () => {
-  const rewardTiers: RewardTier[] = [
-    {
-      id: 1,
-      title: "Starter",
-      target: "Invite 10 direct members with $100 deposit",
-      reward: "40 USDT",
-      bonus: "+ Basic Rank Badge",
-      progress: 10, // Example: 7/10 completed
-      completed: false,
-      icon: <FiStar className="text-yellow-500" />,
-      color: "from-yellow-50 to-yellow-100 border-yellow-200"
-    },
-    {
-      id: 2,
-      title: "Achiever",
-      target: "Invite 20 direct members with $100 deposit",
-      reward: "80 USDT",
-      bonus: "+ Silver Rank Badge",
-      progress: 15, // Example: 15/20 completed
-      completed: false,
-      icon: <FiTrendingUp className="text-blue-500" />,
-      color: "from-blue-50 to-blue-100 border-blue-200"
-    },
-    {
-      id: 3,
-      title: "Champion",
-      target: "Invite 50 direct members with $100 deposit",
-      reward: "200 USDT",
-      bonus: "+ Gold Rank Badge",
-      progress: 32, // Example: 32/50 completed
-      completed: false,
-      icon: <FiAward className="text-purple-500" />,
-      color: "from-purple-50 to-purple-100 border-purple-200"
-    },
-    {
-      id: 4,
-      title: "Elite",
-      target: "Invite 100 direct members with $100 deposit",
-      reward: "500 USDT",
-      bonus: "+ Diamond Rank Badge + Exclusive Rewards",
-      progress: 68, // Example: 68/100 completed
-      completed: false,
-      icon: <FiGift className="text-pink-500" />,
-      color: "from-pink-50 to-pink-100 border-pink-200"
-    },
+  const [claimedRewards, setClaimedRewards] = useState<number[]>([]);
+
+  const teamDepositTiers: RewardTier[] = [
     {
       id: 5,
-      title: "Task 3",
-      target: "Invite 20 members to make a deposit",
+      title: "Bronze Team",
+      target: "Team deposits $10,000",
       reward: "100 USDT",
-      bonus: "+ Bonus Rewards",
-      progress: 12, // Example: 12/20 completed
+      bonus: "+ Monthly Salary",
+      monthlySalary: "100 USDT/month",
+      progress: 10000,
       completed: false,
-      icon: <FiBarChart2 className="text-green-500" />,
-      color: "from-green-50 to-green-100 border-green-200"
+      icon: <FiDollarSign className="text-amber-600" />,
+      color: "from-amber-50 to-amber-100 border-amber-200",
+      isClaimable: false
     },
     {
       id: 6,
-      title: "Task 4",
-      target: "Invite 50 members to make a deposit",
-      reward: "500 USDT",
-      bonus: "+ Special Bonus",
-      progress: 28, // Example: 28/50 completed
+      title: "Silver Team",
+      target: "Team deposits $20,000",
+      reward: "200 USDT",
+      bonus: "+ Monthly Salary",
+      monthlySalary: "200 USDT/month",
+      progress: 18500,
       completed: false,
-      icon: <FiUsers className="text-indigo-500" />,
-      color: "from-indigo-50 to-indigo-100 border-indigo-200"
+      icon: <FiDollarSign className="text-gray-400" />,
+      color: "from-gray-50 to-gray-100 border-gray-200",
+      isClaimable: false
     },
     {
       id: 7,
-      title: "Task 5",
-      target: "Invite 100 members to make a deposit",
-      reward: "1000 USDT",
-      bonus: "+ VIP Rewards",
-      progress: 45, // Example: 45/100 completed
+      title: "Gold Team",
+      target: "Team deposits $30,000",
+      reward: "300 USDT",
+      bonus: "+ Monthly Salary",
+      monthlySalary: "300 USDT/month",
+      progress: 27500,
       completed: false,
-      icon: <FiCheckCircle className="text-red-500" />,
-      color: "from-red-50 to-red-100 border-red-200"
+      icon: <FiDollarSign className="text-yellow-500" />,
+      color: "from-yellow-50 to-yellow-100 border-yellow-200",
+      isClaimable: false
+    },
+    {
+      id: 8,
+      title: "Platinum Team",
+      target: "Team deposits $40,000",
+      reward: "400 USDT",
+      bonus: "+ Monthly Salary",
+      monthlySalary: "400 USDT/month",
+      progress: 38500,
+      completed: false,
+      icon: <FiDollarSign className="text-blue-400" />,
+      color: "from-blue-50 to-blue-100 border-blue-200",
+      isClaimable: false
+    },
+    {
+      id: 9,
+      title: "Diamond Team",
+      target: "Team deposits $50,000",
+      reward: "600 USDT",
+      bonus: "+ Monthly Salary",
+      monthlySalary: "600 USDT/month",
+      progress: 48500,
+      completed: false,
+      icon: <FiDollarSign className="text-purple-500" />,
+      color: "from-purple-50 to-purple-100 border-purple-200",
+      isClaimable: false
     }
   ];
 
@@ -111,7 +105,13 @@ const RankRewardPage = () => {
     directReferrals: 89,
     directActiveMembers: 67,
     totalEarned: 1240,
+    teamDeposits: 48500,
     nextReward: "Achiever (15/20)"
+  };
+
+  const handleClaimReward = (id: number) => {
+    setClaimedRewards([...claimedRewards, id]);
+    alert(`Reward claimed successfully!`);
   };
 
   return (
@@ -129,7 +129,7 @@ const RankRewardPage = () => {
         </div>
 
         {/* Stats Overview */}
-        <div className="grid grid-cols-2 md:grid-cols-2 gap-4 mb-8">
+        <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mb-8">
           <StatCard 
             icon={<FiUsers className="text-blue-500" />}
             title="Direct Referrals"
@@ -138,18 +138,40 @@ const RankRewardPage = () => {
           />
           <StatCard 
             icon={<FiUserCheck className="text-green-500" />}
-            title="Direct Active Members"
+            title="Active Members"
             value={stats.directActiveMembers}
             color="green"
           />
-          
+          <StatCard 
+            icon={<FiDollarSign className="text-purple-500" />}
+            title="Total Earned"
+            value={`${stats.totalEarned} USDT`}
+            color="purple"
+          />
+          <StatCard 
+            icon={<FiBarChart2 className="text-amber-500" />}
+            title="Team Deposits"
+            value={`${stats.teamDeposits.toLocaleString()} USDT`}
+            color="amber"
+          />
         </div>
 
-        {/* Reward Tiers */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-          {rewardTiers.map((tier) => (
-            <RewardCard key={tier.id} tier={tier} />
-          ))}
+        {/* Salary Rewards Section */}
+        <div className="mb-12">
+          <h2 className="text-2xl font-bold text-gray-800 mb-6 flex items-center">
+            <FiCalendar className="mr-2 text-indigo-500" />
+            Automatic Salary Rewards
+          </h2>
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+            {teamDepositTiers.map((tier) => (
+              <TeamDepositCard 
+                key={tier.id} 
+                tier={tier} 
+                onClaim={handleClaimReward}
+                isClaimed={claimedRewards.includes(tier.id)}
+              />
+            ))}
+          </div>
         </div>
 
         {/* Additional Info */}
@@ -161,19 +183,19 @@ const RankRewardPage = () => {
           <ul className="space-y-3 text-gray-700">
             <li className="flex items-start">
               <span className="text-green-500 mr-2">✓</span>
-              Invite friends to join and make their first deposit
+              Claimable rewards can be manually claimed when targets are reached
             </li>
             <li className="flex items-start">
               <span className="text-green-500 mr-2">✓</span>
-              Earn rewards when they complete qualifying deposits
+              Salary rewards are paid automatically on the 1st of each month
             </li>
             <li className="flex items-start">
               <span className="text-green-500 mr-2">✓</span>
-              Climb through the ranks for bigger bonuses
+              Team deposits accumulate across your entire network
             </li>
             <li className="flex items-start">
               <span className="text-green-500 mr-2">✓</span>
-              Rewards are paid automatically within 24 hours
+              Rewards are paid in USDT directly to your wallet
             </li>
           </ul>
         </div>
@@ -182,6 +204,7 @@ const RankRewardPage = () => {
   );
 };
 
+// StatCard Component
 const StatCard: React.FC<{
   icon: React.ReactNode;
   title: string;
@@ -192,7 +215,8 @@ const StatCard: React.FC<{
     blue: 'bg-blue-50 text-blue-600 border-blue-200',
     green: 'bg-green-50 text-green-600 border-green-200',
     purple: 'bg-purple-50 text-purple-600 border-purple-200',
-    yellow: 'bg-yellow-50 text-yellow-600 border-yellow-200'
+    yellow: 'bg-yellow-50 text-yellow-600 border-yellow-200',
+    amber: 'bg-amber-50 text-amber-600 border-amber-200'
   };
 
   return (
@@ -213,9 +237,16 @@ const StatCard: React.FC<{
   );
 };
 
-const RewardCard: React.FC<{ tier: RewardTier }> = ({ tier }) => {
-  const progressPercentage = Math.min(100, (tier.progress / parseInt(tier.target.split(' ')[1])) * 100);
-  const isCompleted = progressPercentage === 100;
+// TeamDepositCard Component for auto-paid salary rewards with instant reward claim
+const TeamDepositCard: React.FC<{ 
+  tier: RewardTier;
+  onClaim: (id: number) => void;
+  isClaimed: boolean;
+}> = ({ tier, onClaim, isClaimed }) => {
+  const targetMatch = tier.target.match(/\$([\d,]+)/);
+  const targetAmount = targetMatch ? parseInt(targetMatch[1].replace(/,/g, '')) : 0;
+  const progressPercentage = Math.min(100, (tier.progress / targetAmount) * 100);
+  const isCompleted = progressPercentage >= 100;
 
   return (
     <motion.div
@@ -233,40 +264,52 @@ const RewardCard: React.FC<{ tier: RewardTier }> = ({ tier }) => {
           </div>
           {isCompleted && (
             <span className="bg-white text-green-600 text-xs px-2 py-1 rounded-full flex items-center">
-              <FiCheckCircle className="mr-1" /> Completed
+              <FiCheckCircle className="mr-1" /> Active
             </span>
           )}
         </div>
 
         <div className="mb-4">
           <div className="flex justify-between text-sm mb-1">
-            <span className="font-medium">Progress: {tier.progress}/{tier.target.split(' ')[1]}</span>
+            <span className="font-medium">Progress: {tier.progress.toLocaleString()}/{targetAmount.toLocaleString()} USDT</span>
             <span className="font-bold">{progressPercentage.toFixed(0)}%</span>
           </div>
           <div className="w-full bg-gray-200 rounded-full h-2.5">
             <div 
-              className="bg-gradient-to-r from-blue-500 to-purple-600 h-2.5 rounded-full" 
+              className="bg-gradient-to-r from-indigo-500 to-blue-400 h-2.5 rounded-full" 
               style={{ width: `${progressPercentage}%` }}
             ></div>
           </div>
         </div>
 
-        <div className="grid grid-cols-2 gap-3">
+        <div className="grid grid-cols-2 gap-3 mb-3">
           <div className="bg-white/80 rounded-lg p-3 text-center">
-            <p className="text-xs text-gray-500">Reward</p>
+            <p className="text-xs text-gray-500">Instant Reward</p>
             <p className="font-bold text-green-600">{tier.reward}</p>
           </div>
           <div className="bg-white/80 rounded-lg p-3 text-center">
-            <p className="text-xs text-gray-500">Bonus</p>
-            <p className="font-bold text-purple-600">{tier.bonus}</p>
+            <p className="text-xs text-gray-500">Monthly Salary</p>
+            <p className="font-bold text-purple-600">{tier.monthlySalary}</p>
           </div>
         </div>
 
+        <div className="flex items-center text-xs text-gray-500 mt-2">
+          <FiCalendar className="mr-1" />
+          <span>Auto-paid on 1st of each month</span>
+        </div>
+
         <button
-          className={`mt-4 w-full ${isCompleted ? 'bg-green-600' : 'bg-gray-300'} text-white py-2 rounded-lg font-medium text-sm hover:bg-gray-50 transition`}
-          disabled={!isCompleted}
+          onClick={() => onClaim(tier.id)}
+          className={`mt-4 w-full ${
+            isClaimed 
+              ? 'bg-gray-400 cursor-not-allowed' 
+              : isCompleted 
+                ? 'bg-gradient-to-r from-green-500 to-teal-400 hover:from-green-600 hover:to-teal-500' 
+                : 'bg-gray-300 cursor-not-allowed'
+          } text-white py-2 rounded-lg font-medium text-sm transition`}
+          disabled={!isCompleted || isClaimed}
         >
-          {isCompleted ? 'Claim Reward' : 'Target Not Reached'}
+          {isClaimed ? 'Bonus Claimed' : isCompleted ? 'Claim Instant Reward' : `Need ${(targetAmount - tier.progress).toLocaleString()} USDT`}
         </button>
       </div>
     </motion.div>

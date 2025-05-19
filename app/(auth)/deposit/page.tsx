@@ -1,14 +1,13 @@
 'use client';
 
 import { useState } from 'react';
-import { FiArrowUp, FiCopy, FiCheck, FiClock, FiInfo, FiGift } from 'react-icons/fi';
+import { FiArrowUp, FiCopy, FiCheck, FiClock, FiInfo, FiGift, FiAlertTriangle } from 'react-icons/fi';
 import Link from 'next/link';
 
 export default function DepositPage() {
   const [txId, setTxId] = useState<string>('');
   const [copied, setCopied] = useState(false);
   const [showHistory, setShowHistory] = useState(false);
-  const [depositAmount, setDepositAmount] = useState<number>(0);
 
   const walletAddress = 'TNPdZ4pJcG9WJfVZ8Jk7vL5mRtNxY8zX9B';
   const network = 'TRC20';
@@ -19,14 +18,6 @@ export default function DepositPage() {
     { id: '1', amount: 50, status: 'Completed', date: '2023-06-15 14:30', txId: '0x123...456' },
     { id: '2', amount: 100, status: 'Pending', date: '2023-06-14 09:15', txId: '0x789...012' },
   ];
-
-  // Calculate 5% bonus for deposits over $100
-  const calculateBonus = (amount: number) => {
-    return amount > 100 ? amount * 0.05 : 0;
-  };
-
-  const bonus = calculateBonus(depositAmount);
-  const totalAmount = depositAmount + bonus;
 
   const handleCopy = () => {
     navigator.clipboard.writeText(walletAddress);
@@ -40,20 +31,15 @@ export default function DepositPage() {
       alert('Please enter your Transaction ID');
       return;
     }
-    if (depositAmount < minDeposit) {
-      alert(`Minimum deposit is $${minDeposit}`);
-      return;
-    }
     
-    alert(`Deposit submitted!\nAmount: $${depositAmount}\nBonus: $${bonus.toFixed(2)}\nTotal: $${totalAmount.toFixed(2)}\nTX ID: ${txId}`);
+    alert(`Deposit submitted!\nTX ID: ${txId}\n\nYour deposit will be processed after network confirmation.`);
     setTxId('');
-    setDepositAmount(0);
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-indigo-100 to-purple-100 p-4 md:p-8 flex items-center justify-center">
+    <div className="min-h-screen bg-gradient-to-br from-indigo-50 to-purple-50 p-4 md:p-8 flex items-center justify-center">
       <div className="w-full max-w-lg">
-        <div className="bg-white rounded-2xl shadow-2xl overflow-hidden border border-white/20">
+        <div className="bg-white rounded-2xl shadow-xl overflow-hidden border border-white/20">
           {/* Card Header */}
           <div className="bg-gradient-to-r from-indigo-600 to-purple-600 p-6 text-white">
             <div className="flex justify-between items-start">
@@ -62,11 +48,12 @@ export default function DepositPage() {
                   <FiArrowUp className="rotate-90 mr-1" /> Back to Wallet
                 </Link>
                 <h1 className="text-2xl font-bold">Deposit USDT ({network})</h1>
-                <p className="text-white/90 mt-1">Minimum deposit: ${minDeposit}</p>
+                <p className="text-white/90 mt-1">Secure and fast deposits</p>
               </div>
               <button 
                 onClick={() => setShowHistory(!showHistory)}
                 className="p-2 bg-white/20 rounded-full hover:bg-white/30 transition"
+                aria-label="Transaction history"
               >
                 <FiClock />
               </button>
@@ -84,7 +71,7 @@ export default function DepositPage() {
                   <div key={deposit.id} className="border-b border-gray-200 pb-3 last:border-0">
                     <div className="flex justify-between">
                       <div>
-                        <p className="font-medium">${deposit.amount}</p>
+                        <p className="font-medium">${deposit.amount} USDT</p>
                         <p className="text-xs text-gray-500">{deposit.date}</p>
                       </div>
                       <div className="text-right">
@@ -113,7 +100,7 @@ export default function DepositPage() {
                   className="w-full h-full object-contain rounded-md shadow-inner"
                 />
               </div>
-              <p className="text-sm text-indigo-700 font-medium">Scan this QR code to deposit</p>
+              <p className="text-sm text-indigo-700 font-medium">Scan QR code to deposit</p>
             </div>
 
             {/* Wallet Address */}
@@ -127,6 +114,7 @@ export default function DepositPage() {
                   onClick={handleCopy}
                   className="text-indigo-600 hover:text-indigo-800 ml-2 p-1.5 rounded-full hover:bg-indigo-50 transition"
                   title="Copy to clipboard"
+                  aria-label="Copy wallet address"
                 >
                   {copied ? <FiCheck className="text-green-500" /> : <FiCopy />}
                 </button>
@@ -139,37 +127,6 @@ export default function DepositPage() {
 
             {/* Transaction Form */}
             <form onSubmit={handleSubmit} className="space-y-4">
-              {/* Deposit Amount */}
-              <div>
-                <label className="block text-sm font-medium text-gray-700 mb-2">
-                  Deposit Amount (USDT)
-                </label>
-                <input
-                  type="number"
-                  value={depositAmount || ''}
-                  onChange={(e) => setDepositAmount(Number(e.target.value))}
-                  placeholder={`Minimum $${minDeposit}`}
-                  className="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 bg-white hover:border-indigo-300 transition"
-                  min={minDeposit}
-                  step="0.01"
-                />
-              </div>
-
-              {/* Bonus Display */}
-              {depositAmount > 100 && (
-                <div className="bg-green-50 border border-green-100 rounded-lg p-3 flex items-center">
-                  <FiGift className="text-green-500 mr-2 flex-shrink-0" />
-                  <div>
-                    <p className="text-sm font-medium text-green-800">
-                      You'll receive a 5% bonus!
-                    </p>
-                    <p className="text-xs text-green-600">
-                      +${bonus.toFixed(2)} bonus (Total: ${totalAmount.toFixed(2)})
-                    </p>
-                  </div>
-                </div>
-              )}
-
               {/* Transaction ID */}
               <div>
                 <label className="block text-sm font-medium text-gray-700 mb-2">
@@ -185,49 +142,85 @@ export default function DepositPage() {
                 />
                 <p className="text-xs text-gray-500 mt-2 flex items-start">
                   <FiInfo className="mr-1.5 mt-0.5 flex-shrink-0" />
-                  <span>Find this TXID in your wallet's transaction history after sending USDT</span>
+                  <span>Find this in your wallet's transaction history after sending USDT</span>
                 </p>
               </div>
 
               {/* Submit Button */}
               <button
                 type="submit"
-                disabled={!txId || depositAmount < minDeposit}
+                disabled={!txId}
                 className={`w-full py-3.5 rounded-lg font-medium text-white bg-gradient-to-r from-indigo-600 to-purple-600 hover:from-indigo-700 hover:to-purple-700 transition-all shadow-md hover:shadow-lg ${
-                  (!txId || depositAmount < minDeposit) ? 'opacity-50 cursor-not-allowed' : ''
+                  !txId ? 'opacity-50 cursor-not-allowed' : ''
                 }`}
               >
                 Confirm Deposit
               </button>
             </form>
 
-            {/* Important Notes */}
-            <div className="mt-6 p-4 bg-amber-50/80 rounded-lg border border-amber-100">
-              <h4 className="text-sm font-medium text-amber-800 flex items-center mb-2">
-                <FiInfo className="mr-2 flex-shrink-0" /> Important Information
-              </h4>
-              <ul className="text-xs text-amber-700 space-y-1.5">
-                <li className="flex items-start">
-                  <span className="text-amber-500 mr-1.5 mt-0.5">•</span>
-                  <span>Minimum deposit: <span className="font-semibold">${minDeposit} USDT</span></span>
-                </li>
-                <li className="flex items-start">
-                  <span className="text-amber-500 mr-1.5 mt-0.5">•</span>
-                  <span>Get <span className="font-semibold">5% bonus</span> for deposits over $100</span>
-                </li>
-                <li className="flex items-start">
-                  <span className="text-amber-500 mr-1.5 mt-0.5">•</span>
-                  <span>Network: <span className="font-semibold">{network}</span> (DO NOT use other networks)</span>
-                </li>
-                <li className="flex items-start">
-                  <span className="text-amber-500 mr-1.5 mt-0.5">•</span>
-                  <span>Processing time: <span className="font-semibold">1-3 network confirmations</span></span>
-                </li>
-              </ul>
+            {/* Security & Information Section */}
+            <div className="mt-6 space-y-4">
+              <div className="p-4 bg-blue-50/80 rounded-lg border border-blue-100">
+                <h4 className="text-sm font-medium text-blue-800 flex items-center mb-2">
+                  <FiInfo className="mr-2 flex-shrink-0" /> Deposit Guidelines
+                </h4>
+                <ul className="text-xs text-blue-700 space-y-1.5">
+                  <li className="flex items-start">
+                    <span className="text-blue-500 mr-1.5 mt-0.5">•</span>
+                    <span><span className="font-semibold">Minimum deposit:</span> ${minDeposit} USDT</span>
+                  </li>
+                  <li className="flex items-start">
+                    <span className="text-blue-500 mr-1.5 mt-0.5">•</span>
+                    <span><span className="font-semibold">Network:</span> {network} only (TRC20 network)</span>
+                  </li>
+                  <li className="flex items-start">
+                    <span className="text-blue-500 mr-1.5 mt-0.5">•</span>
+                    <span><span className="font-semibold">Processing time:</span> 1-3 network confirmations (~5-15 minutes)</span>
+                  </li>
+                </ul>
+              </div>
+
+              <div className="p-4 bg-amber-50/80 rounded-lg border border-amber-100">
+                <h4 className="text-sm font-medium text-amber-800 flex items-center mb-2">
+                  <FiAlertTriangle className="mr-2 flex-shrink-0" /> Security Notice
+                </h4>
+                <ul className="text-xs text-amber-700 space-y-1.5">
+                  <li className="flex items-start">
+                    <span className="text-amber-500 mr-1.5 mt-0.5">•</span>
+                    <span>Never send USDT from exchange wallets directly. Withdraw to your private wallet first.</span>
+                  </li>
+                  <li className="flex items-start">
+                    <span className="text-amber-500 mr-1.5 mt-0.5">•</span>
+                    <span>Double-check the network before sending. We only support {network}.</span>
+                  </li>
+                  <li className="flex items-start">
+                    <span className="text-amber-500 mr-1.5 mt-0.5">•</span>
+                    <span>For large deposits, consider sending a small test amount first.</span>
+                  </li>
+                </ul>
+              </div>
+
+              <div className="p-4 bg-green-50/80 rounded-lg border border-green-100">
+                <h4 className="text-sm font-medium text-green-800 flex items-center mb-2">
+                  <FiGift className="mr-2 flex-shrink-0" /> Bonus Information
+                </h4>
+                <ul className="text-xs text-green-700 space-y-1.5">
+                  <li className="flex items-start">
+                    <span className="text-green-500 mr-1.5 mt-0.5">•</span>
+                    <span><span className="font-semibold">5% bonus</span> on deposits over $100 USDT</span>
+                  </li>
+                  <li className="flex items-start">
+                    <span className="text-green-500 mr-1.5 mt-0.5">•</span>
+                    <span>Bonuses are credited automatically after deposit confirmation</span>
+                  </li>
+                  <li className="flex items-start">
+                    <span className="text-green-500 mr-1.5 mt-0.5">•</span>
+                    <span>Bonus amounts are subject to terms and conditions</span>
+                  </li>
+                </ul>
+              </div>
             </div>
           </div>
-
-          {/* Card Footer */}
         </div>
       </div>
     </div>

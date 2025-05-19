@@ -47,16 +47,16 @@ const Navigation = () => {
       bg: 'bg-rose-100'
     },
     { 
-      name: 'Company', 
+      name: 'Rank&Reward', 
       icon: <MdBusiness />, 
-      path: '/company', 
+      path: '/rank', 
       color: 'text-amber-600',
       bg: 'bg-amber-100'
     },
     { 
       name: 'Rule', 
       icon: <MdGavel />, 
-      path: '/rules', 
+      path: '/rule', 
       color: 'text-orange-600',
       bg: 'bg-orange-100'
     },
@@ -68,9 +68,9 @@ const Navigation = () => {
       bg: 'bg-pink-100'
     },
     { 
-      name: 'Rank & Reward', 
+      name: 'Task Center', 
       icon: <MdAssignment />, 
-      path: '/rank', 
+      path: '/task-center', 
       color: 'text-teal-600',
       bg: 'bg-teal-100'
     },
