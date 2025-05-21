@@ -8,10 +8,12 @@ import Partners from '@/components/ui/home/Partners';
 import Conference from '@/components/ui/home/confernce';
 import TaskRecordComponent from '@/components/ui/home/taskrecord';
 import Crisp from '@/components/ui/auth/crisp';
+import CompanyOffersTicker from '@/components/ui/home/welcomenotice';
 
 export default function Home() {
 	return (
 		<HomeLayout>
+			<CompanyOffersTicker></CompanyOffersTicker>
 			<BannerSlider></BannerSlider>
 			<UserCountdown></UserCountdown>
 			<TaskRecordComponent></TaskRecordComponent>

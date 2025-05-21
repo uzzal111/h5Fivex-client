@@ -11,7 +11,7 @@ export default function PrivacyPolicy() {
 
       <div className="space-y-6 text-gray-800">
         <p className="text-lg">
-          At <strong>Bitnex</strong>, we take your privacy seriously. This Privacy Policy explains how we collect, use, disclose, and safeguard your personal information when you use our platform. Please read this policy carefully.
+          At <strong>h5Fivex</strong>, we take your privacy seriously. This Privacy Policy explains how we collect, use, disclose, and safeguard your personal information when you use our platform. Please read this policy carefully.
         </p>
 
         <h2 className="text-2xl font-semibold text-indigo-700">1. Information We Collect</h2>
@@ -80,7 +80,7 @@ export default function PrivacyPolicy() {
 
         <h2 className="text-2xl font-semibold text-indigo-700">9. Contact Us</h2>
         <p>
-          If you have any questions or concerns about this Privacy Policy or how we handle your personal information, please contact us at: <strong>support@bitnex.com</strong>.
+          If you have any questions or concerns about this Privacy Policy or how we handle your personal information, please contact us at: <strong>support@h5Fivex.com</strong>.
         </p>
       </div>
     </section>

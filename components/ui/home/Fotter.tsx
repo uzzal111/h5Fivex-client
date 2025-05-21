@@ -38,7 +38,7 @@ function HomeFooter() {
 
         {/* Footer Content */}
         <div className="text-center text-sm text-gray-500 dark:text-gray-300">
-          <p>&copy; 2025 Bitnex. All Rights Reserved.</p>
+          <p>&copy; 2025 h5Fivex. All Rights Reserved.</p>
           <p>
             <a href="/terms-conditions" className="hover:text-indigo-600">Terms & Conditions</a> |{" "}
             <a href="/privacy-policy" className="hover:text-indigo-600">Privacy Policy</a>

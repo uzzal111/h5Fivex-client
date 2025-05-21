@@ -69,7 +69,7 @@ const H5FivexRewardsModal = () => {
               <div>
                 <h3 className="font-bold text-blue-800 text-xs">Deposit Bonus</h3>
                 <p className="text-[11px] text-gray-600">
-                  5% cashback on 100$+ deposits
+                  100$ deposit bonus 5%
                 </p>
               </div>
             </div>
@@ -95,7 +95,7 @@ const H5FivexRewardsModal = () => {
               <div>
                 <h3 className="font-bold text-amber-800 text-xs">Rank Rewards</h3>
                 <p className="text-[11px] text-gray-600">
-                  $40-$1000 performance bonus
+                  100$-1000$ performance bonus
                 </p>
               </div>
             </div>

@@ -23,7 +23,7 @@ type StatItem = {
 
 export default function InvitePage() {
   const [copied, setCopied] = useState(false);
-  const referralLink = "https://vipdashboard.com/ref/user123";
+  const referralLink = "https://h5fivex.com/ref/user123";
   const referralCode = "USER123";
   const [activeShare, setActiveShare] = useState<string | null>(null);
 
@@ -35,7 +35,7 @@ export default function InvitePage() {
       color: "bg-gradient-to-br from-cyan-200 to-cyan-300" 
     },
     { 
-      value: 56, 
+      value: 560000, 
       label: "Total Earnings", 
       icon: <FiDollarSign className="text-sky-600" />, 
       color: "bg-gradient-to-br from-sky-200 to-sky-300" 

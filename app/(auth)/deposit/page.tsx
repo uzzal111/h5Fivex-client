@@ -6,7 +6,8 @@ import Link from 'next/link';
 
 export default function DepositPage() {
   const [txId, setTxId] = useState<string>('');
-  const [copied, setCopied] = useState(false);
+  const [copiedAddress, setCopiedAddress] = useState(false);
+  const [copiedTxId, setCopiedTxId] = useState<string | null>(null);
   const [showHistory, setShowHistory] = useState(false);
 
   const walletAddress = 'TNPdZ4pJcG9WJfVZ8Jk7vL5mRtNxY8zX9B';
@@ -15,14 +16,20 @@ export default function DepositPage() {
   const qrCodeImage = '/images/deposit-qr-code.png';
 
   const depositHistory = [
-    { id: '1', amount: 50, status: 'Completed', date: '2023-06-15 14:30', txId: '0x123...456' },
-    { id: '2', amount: 100, status: 'Pending', date: '2023-06-14 09:15', txId: '0x789...012' },
+    { id: '1', amount: 50, status: 'Completed', date: '2023-06-15 14:30', txId: '0x1234567890abcdef1234567890abcdef1234567890abcdef' },
+    { id: '2', amount: 100, status: 'Pending', date: '2023-06-14 09:15', txId: '0x9876543210fedcba9876543210fedcba9876543210fedcba' },
   ];
 
-  const handleCopy = () => {
+  const handleCopyAddress = () => {
     navigator.clipboard.writeText(walletAddress);
-    setCopied(true);
-    setTimeout(() => setCopied(false), 2000);
+    setCopiedAddress(true);
+    setTimeout(() => setCopiedAddress(false), 2000);
+  };
+
+  const handleCopyTxId = (txId: string) => {
+    navigator.clipboard.writeText(txId);
+    setCopiedTxId(txId);
+    setTimeout(() => setCopiedTxId(null), 2000);
   };
 
   const handleSubmit = (e: React.FormEvent) => {
@@ -34,6 +41,10 @@ export default function DepositPage() {
     
     alert(`Deposit submitted!\nTX ID: ${txId}\n\nYour deposit will be processed after network confirmation.`);
     setTxId('');
+  };
+
+  const formatTxId = (txId: string) => {
+    return `${txId.substring(0, 6)}...${txId.substring(txId.length - 4)}`;
   };
 
   return (
@@ -80,7 +91,20 @@ export default function DepositPage() {
                         }`}>
                           {deposit.status}
                         </span>
-                        <p className="text-xs text-gray-500 truncate max-w-[120px]">{deposit.txId}</p>
+                        <div className="flex items-center justify-end mt-1">
+                          <p className="text-xs text-gray-500">{formatTxId(deposit.txId)}</p>
+                          <button 
+                            onClick={() => handleCopyTxId(deposit.txId)}
+                            className="text-gray-400 hover:text-gray-600 ml-1 p-1 rounded-full hover:bg-gray-200 transition"
+                            title="Copy full TX ID"
+                          >
+                            {copiedTxId === deposit.txId ? (
+                              <FiCheck className="text-green-500" size={12} />
+                            ) : (
+                              <FiCopy size={12} />
+                            )}
+                          </button>
+                        </div>
                       </div>
                     </div>
                   </div>
@@ -111,12 +135,12 @@ export default function DepositPage() {
               <div className="flex items-center justify-between bg-gray-50 border border-gray-200 px-4 py-3 rounded-lg hover:bg-gray-100 transition">
                 <p className="text-sm font-mono truncate">{walletAddress}</p>
                 <button 
-                  onClick={handleCopy}
+                  onClick={handleCopyAddress}
                   className="text-indigo-600 hover:text-indigo-800 ml-2 p-1.5 rounded-full hover:bg-indigo-50 transition"
                   title="Copy to clipboard"
                   aria-label="Copy wallet address"
                 >
-                  {copied ? <FiCheck className="text-green-500" /> : <FiCopy />}
+                  {copiedAddress ? <FiCheck className="text-green-500" /> : <FiCopy />}
                 </button>
               </div>
               <p className="text-xs text-gray-500 mt-2 flex items-start">

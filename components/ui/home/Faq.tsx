@@ -5,29 +5,29 @@ import { ChevronDown } from "lucide-react";
 
 const faqs = [
   {
-    question: "What is Bitnex?",
+    question: "What is h5Fivex?",
     answer:
-      "Bitnex is a global eCommerce platform where users can open accounts, promote products, and earn profits daily through digital marketing.",
+      "h5Fivex is a global eCommerce platform where users can open accounts, promote products, and earn profits daily through digital marketing.",
   },
   {
-    question: "How much does it cost to join Bitnex?",
+    question: "How much does it cost to join h5Fivex?",
     answer:
-      "Joining Bitnex requires a one-time activation fee of 30 USDT. This gives you full access to the marketing tools, dashboard, and product promotions.",
+      "Joining h5Fivex requires a one-time activation fee of 30 USDT. This gives you full access to the marketing tools, dashboard, and product promotions.",
   },
   {
-    question: "How do I earn money from Bitnex?",
+    question: "How do I earn money from h5Fivex?",
     answer:
       "Once you activate your account, you can market products using your personal links. Each sale you generate earns you commission directly.",
   },
   {
     question: "Do I need to hold any inventory or deliver products?",
     answer:
-      "No, Bitnex handles inventory and delivery. You only focus on promoting products — we do the rest!",
+      "No, h5Fivex handles inventory and delivery. You only focus on promoting products — we do the rest!",
   },
   {
-    question: "Is Bitnex available worldwide?",
+    question: "Is h5Fivex available worldwide?",
     answer:
-      "Yes! Bitnex supports users from over 50 countries. You can market internationally and get paid from anywhere.",
+      "Yes! h5Fivex supports users from over 50 countries. You can market internationally and get paid from anywhere.",
   },
   {
     question: "How do I get paid?",
@@ -37,7 +37,7 @@ const faqs = [
   {
     question: "Can I refer others to earn more?",
     answer:
-      "Yes! Bitnex has a referral system. When your invited user joins and activates, you receive additional earnings.",
+      "Yes! h5Fivex has a referral system. When your invited user joins and activates, you receive additional earnings.",
   },
   {
     question: "What kind of products can I promote?",

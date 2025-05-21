@@ -1,4 +1,5 @@
 import React from 'react';
+import CompanyOffersTicker from '@/components/ui/home/welcomenotice';
 import BannerSlider from '@/components/ui/home/BannerSlider';
 import Navigation from '@/components/ui/auth/navigation';
 import TaskRecordComponent from '@/components/ui/home/taskrecord';
@@ -9,7 +10,7 @@ import DashboardModal from '@/components/ui/home/dashboardmodel';
 const DashboardPage = () => {
 	return (
 		<div>
-			
+			<CompanyOffersTicker></CompanyOffersTicker>
 			<BannerSlider></BannerSlider>
 			<Navigation></Navigation>
 			<TaskRecordComponent></TaskRecordComponent>

@@ -3,11 +3,11 @@
 import React, { useState, useRef } from 'react';
 import { useRouter } from 'next/navigation';
 import { 
-  FiUser, FiDollarSign, FiCreditCard, FiClock, 
+  FiInfo, FiDollarSign, FiCreditCard, FiClock, 
   FiPieChart, FiTrendingUp, FiUsers, FiMessageSquare,
   FiSettings, FiLogOut, FiChevronRight, FiCheckCircle,
   FiEdit, FiUpload, FiImage, FiLock, FiKey, FiDownload,
-  FiSmartphone, 
+  FiSmartphone, FiCopy, FiCheck
 } from 'react-icons/fi';
 
 const ProfilePage = () => {
@@ -22,10 +22,11 @@ const ProfilePage = () => {
   const [currentPassword, setCurrentPassword] = useState('');
   const [newPassword, setNewPassword] = useState('');
   const [confirmPassword, setConfirmPassword] = useState('');
+  const [copiedItems, setCopiedItems] = useState<Record<string, boolean>>({});
 
+  // User data with enhanced fields for copy functionality
   const userData = {
     id: '2290256',
-    accountNumber: '383-49647176',
     balance: 278.06,
     yesterdayEarnings: 6.17,
     pendingFunds: 0,
@@ -36,17 +37,27 @@ const ProfilePage = () => {
     yesterdayTeamCommissions: 45.32,
     totalTeamCommissions: 320.45,
     vipChannel: 'VIP1Channel',
+    walletAddress: 'TNPdZ4pJcG9WJfVZ8Jk7vL5mRtNxY8zX9B'
   };
 
   const transactionHistory = [
-    { id: 1, type: 'Deposit', amount: 100.00, date: '2025-05-10', status: 'Completed' },
-    { id: 2, type: 'Withdrawal', amount: -50.00, date: '2025-05-08', status: 'Completed' },
-    { id: 3, type: 'Commission', amount: 12.50, date: '2025-05-07', status: 'Completed' },
+    { id: 1, type: 'Deposit', amount: 100.00, date: '2025-05-10', status: 'Completed', txId: '0x1234567890abcdef' },
+    { id: 2, type: 'Withdrawal', amount: -50.00, date: '2025-05-08', status: 'Completed', txId: '0x9876543210fedcba' },
+    { id: 3, type: 'Commission', amount: 12.50, date: '2025-05-07', status: 'Completed', txId: '0xabcdef1234567890' },
   ];
 
   const appDownloadLinks = {
     android: 'https://play.google.com/store/apps/details?id=com.example.app',
-    
+    ios: 'https://apps.apple.com/us/app/example-app/id1234567890'
+  };
+
+  // Unified copy handler with item tracking
+  const handleCopy = (text: string, itemKey: string) => {
+    navigator.clipboard.writeText(text);
+    setCopiedItems(prev => ({ ...prev, [itemKey]: true }));
+    setTimeout(() => {
+      setCopiedItems(prev => ({ ...prev, [itemKey]: false }));
+    }, 2000);
   };
 
   const handleImageUpload = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -81,6 +92,11 @@ const ProfilePage = () => {
     setConfirmPassword('');
   };
 
+  // Format transaction IDs for display
+  const formatTxId = (txId: string) => {
+    return `${txId.substring(0, 6)}...${txId.substring(txId.length - 4)}`;
+  };
+
   const renderTabContent = () => {
     switch (activeTab) {
       case 'order-record':
@@ -98,11 +114,22 @@ const ProfilePage = () => {
                     <p className={`font-medium ${txn.amount > 0 ? 'text-green-600' : 'text-red-600'}`}>
                       {txn.amount > 0 ? '+' : ''}{txn.amount.toFixed(2)} USDT
                     </p>
-                    <div className="flex items-center justify-end">
+                    <div className="flex items-center justify-end mt-1">
                       <span className={`inline-block w-2 h-2 rounded-full mr-2 ${
                         txn.status === 'Completed' ? 'bg-green-500' : 'bg-yellow-500'
                       }`}></span>
-                      <p className="text-xs text-gray-500">{txn.status}</p>
+                      <p className="text-xs text-gray-500 mr-2">{txn.status}</p>
+                      <button 
+                        onClick={() => handleCopy(txn.txId, `tx-${txn.id}`)}
+                        className="text-gray-400 hover:text-blue-500 transition"
+                        title="Copy Transaction ID"
+                      >
+                        {copiedItems[`tx-${txn.id}`] ? (
+                          <FiCheck className="text-green-500" size={14} />
+                        ) : (
+                          <FiCopy size={14} />
+                        )}
+                      </button>
                     </div>
                   </div>
                 </div>
@@ -120,49 +147,83 @@ const ProfilePage = () => {
                 label="Total Balance"
                 value={`${userData.balance.toFixed(2)} USDT`}
                 bgColor="bg-blue-50"
+                onCopy={() => handleCopy(userData.balance.toFixed(2), 'total-balance')}
               />
               <AssetDetailCard 
                 icon={<FiTrendingUp className="text-green-500" />}
                 label="Available Funds"
                 value={`${userData.availableFunds.toFixed(2)} USDT`}
                 bgColor="bg-green-50"
+                onCopy={() => handleCopy(userData.availableFunds.toFixed(2), 'available-funds')}
               />
               <AssetDetailCard 
                 icon={<FiClock className="text-yellow-500" />}
                 label="Today's Earnings"
                 value={`${userData.todayEarnings.toFixed(2)} USDT`}
                 bgColor="bg-yellow-50"
+                onCopy={() => handleCopy(userData.todayEarnings.toFixed(2), 'today-earnings')}
               />
               <AssetDetailCard 
                 icon={<FiPieChart className="text-purple-500" />}
                 label="Yesterday's Earnings"
                 value={`${userData.yesterdayEarnings.toFixed(2)} USDT`}
                 bgColor="bg-purple-50"
+                onCopy={() => handleCopy(userData.yesterdayEarnings.toFixed(2), 'yesterday-earnings')}
               />
               <AssetDetailCard 
                 icon={<FiUsers className="text-indigo-500" />}
                 label="Today Team Commissions"
                 value={`${userData.teamCommissions.toFixed(2)} USDT`}
                 bgColor="bg-indigo-50"
+                onCopy={() => handleCopy(userData.teamCommissions.toFixed(2), 'team-commissions')}
               />
               <AssetDetailCard 
                 icon={<FiUsers className="text-teal-500" />}
                 label="Yesterday Team Commissions"
                 value={`${userData.yesterdayTeamCommissions.toFixed(2)} USDT`}
                 bgColor="bg-teal-50"
+                onCopy={() => handleCopy(userData.yesterdayTeamCommissions.toFixed(2), 'yesterday-team-commissions')}
               />
               <AssetDetailCard 
                 icon={<FiDollarSign className="text-blue-500" />}
                 label="Total Earnings"
                 value={`${userData.totalEarnings.toFixed(2)} USDT`}
                 bgColor="bg-blue-50"
+                onCopy={() => handleCopy(userData.totalEarnings.toFixed(2), 'total-earnings')}
               />
               <AssetDetailCard 
                 icon={<FiUsers className="text-purple-500" />}
                 label="Total Team Commissions"
                 value={`${userData.totalTeamCommissions.toFixed(2)} USDT`}
                 bgColor="bg-purple-50"
+                onCopy={() => handleCopy(userData.totalTeamCommissions.toFixed(2), 'total-team-commissions')}
               />
+            </div>
+
+            {/* Wallet Address Section */}
+            <div className="mt-6 bg-gray-50 rounded-lg p-4 border border-gray-200">
+              <h4 className="font-medium text-gray-800 mb-3 flex items-center">
+                <FiKey className="text-blue-500 mr-2" />
+                Wallet Address
+              </h4>
+              <div className="flex items-center justify-between bg-white p-3 rounded-md border border-gray-300">
+                <p className="text-sm font-mono truncate">{userData.walletAddress}</p>
+                <button
+                  onClick={() => handleCopy(userData.walletAddress, 'wallet-address')}
+                  className="text-gray-500 hover:text-blue-600 ml-2 p-1 rounded-full hover:bg-gray-100 transition"
+                  title="Copy Wallet Address"
+                >
+                  {copiedItems['wallet-address'] ? (
+                    <FiCheck className="text-green-500" size={16} />
+                  ) : (
+                    <FiCopy size={16} />
+                  )}
+                </button>
+              </div>
+              <p className="text-xs text-gray-500 mt-2 flex items-start">
+                <FiInfo className="mr-1.5 mt-0.5 flex-shrink-0" />
+                <span>Only send USDT to this address. Sending other assets may result in permanent loss.</span>
+              </p>
             </div>
           </div>
         );
@@ -174,7 +235,21 @@ const ProfilePage = () => {
               <form onSubmit={handleEmailChange} className="space-y-4">
                 <div>
                   <label className="block text-sm font-medium text-gray-700 mb-2">Current Email</label>
-                  <div className="bg-gray-50 p-3 rounded-lg text-gray-800">{email}</div>
+                  <div className="flex items-center bg-gray-50 p-3 rounded-lg">
+                    <span className="text-gray-800 flex-grow">{email}</span>
+                    <button 
+                      type="button"
+                      onClick={() => handleCopy(email, 'current-email')}
+                      className="text-gray-400 hover:text-blue-500 ml-2 p-1"
+                      title="Copy email"
+                    >
+                      {copiedItems['current-email'] ? (
+                        <FiCheck className="text-green-500" size={16} />
+                      ) : (
+                        <FiCopy size={16} />
+                      )}
+                    </button>
+                  </div>
                 </div>
                 <div>
                   <label className="block text-sm font-medium text-gray-700 mb-2">New Email</label>
@@ -206,7 +281,20 @@ const ProfilePage = () => {
               <div className="space-y-4">
                 <div>
                   <label className="block text-sm font-medium text-gray-700 mb-2">Current Email</label>
-                  <div className="bg-gray-50 p-3 rounded-lg text-gray-800">{email}</div>
+                  <div className="flex items-center bg-gray-50 p-3 rounded-lg">
+                    <span className="text-gray-800 flex-grow">{email}</span>
+                    <button 
+                      onClick={() => handleCopy(email, 'current-email')}
+                      className="text-gray-400 hover:text-blue-500 ml-2 p-1"
+                      title="Copy email"
+                    >
+                      {copiedItems['current-email'] ? (
+                        <FiCheck className="text-green-500" size={16} />
+                      ) : (
+                        <FiCopy size={16} />
+                      )}
+                    </button>
+                  </div>
                 </div>
                 <button
                   onClick={() => setShowEmailForm(true)}
@@ -285,11 +373,9 @@ const ProfilePage = () => {
                 </div>
               </div>
               
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                {/* QR Code Section */}
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-4 ">
                 
                 
-                {/* Download Buttons */}
                 <div className="space-y-3">
                   <a 
                     href={appDownloadLinks.android} 
@@ -299,14 +385,17 @@ const ProfilePage = () => {
                   >
                     <div className="flex items-center">
                       <div className="bg-white/10 p-1.5 rounded mr-3">
+                        {/* Android icon placeholder */}
                       </div>
                       <div>
                         <p className="text-xs text-gray-300">Download on</p>
-                        <p className="font-medium text-white">Android app</p>
+                        <p className="font-medium text-white">Android</p>
                       </div>
                     </div>
                     <FiDownload className="text-white" />
                   </a>
+                  
+                  
                 </div>
               </div>
             </div>
@@ -373,9 +462,28 @@ const ProfilePage = () => {
               />
             </div>
 
-            {/* Account Info */}
-            <h1 className="text-xl font-bold text-gray-800">{userData.accountNumber}</h1>
-            <p className="text-gray-600 mb-3">ID: {userData.id}</p>
+            {/* Account Info with Copy Buttons */}
+            <div className="text-center mb-3">
+              <div className="flex items-center justify-center">
+
+                  
+              </div>
+              <div className="flex items-center justify-center">
+                <p className="text-gray-600 mr-2">ID: {userData.id}</p>
+                <button 
+                  onClick={() => handleCopy(userData.id, 'user-id')}
+                  className="text-gray-400 hover:text-blue-500"
+                  title="Copy user ID"
+                >
+                  {copiedItems['user-id'] ? (
+                    <FiCheck className="text-green-500" size={14} />
+                  ) : (
+                    <FiCopy size={14} />
+                  )}
+                </button>
+              </div>
+            </div>
+            
             <div className="bg-gradient-to-r from-blue-500 to-purple-600 text-white px-4 py-1 rounded-full text-sm font-medium shadow-sm">
               {userData.vipChannel}
             </div>
@@ -386,14 +494,17 @@ const ProfilePage = () => {
             {/* Total Balance Section */}
             <div className="flex justify-between items-center mb-4">
               <span className="text-sm font-medium">Total Balance (USDT)</span>
-              <div className="flex space-x-2">
-                <button className="bg-white/20 hover:bg-white/30 px-3 py-1 rounded-full text-xs font-medium transition">
-                  Withdraw
-                </button>
-                <button className="bg-white/20 hover:bg-white/30 px-3 py-1 rounded-full text-xs font-medium transition">
-                  Deposit
-                </button>
-              </div>
+              <button 
+                onClick={() => handleCopy(userData.balance.toFixed(2), 'total-balance')}
+                className="text-white/80 hover:text-white text-xs flex items-center"
+              >
+                {copiedItems['total-balance'] ? (
+                  <FiCheck className="mr-1 text-green-300" size={12} />
+                ) : (
+                  <FiCopy className="mr-1" size={12} />
+                )}
+                Copy
+              </button>
             </div>
             <h2 className="text-3xl font-bold mb-6">{userData.balance.toFixed(2)}</h2>
             
@@ -403,26 +514,26 @@ const ProfilePage = () => {
               <div className="grid grid-cols-2 gap-3 mb-3">
                 <StatCard 
                   icon={<FiClock className="text-blue-200" />} 
-                  label="Today" 
+                  label="Today Commission" 
                   value={userData.todayEarnings} 
                   highlight={true}
                 />
                 <StatCard 
                   icon={<FiClock className="text-purple-200" />} 
-                  label="Yesterday" 
+                  label="Yesterday Commission" 
                   value={userData.yesterdayEarnings} 
                 />
               </div>
               <div className="grid grid-cols-2 gap-3">
                 <StatCard 
                   icon={<FiUsers className="text-blue-200" />} 
-                  label="Today Team" 
+                  label="Today Team Commission" 
                   value={userData.teamCommissions} 
                   highlight={true}
                 />
                 <StatCard 
                   icon={<FiUsers className="text-purple-200" />} 
-                  label="Yesterday Team" 
+                  label="Yesterday Team Commission" 
                   value={userData.yesterdayTeamCommissions} 
                 />
               </div>
@@ -441,16 +552,6 @@ const ProfilePage = () => {
                   icon={<FiUsers className="text-purple-200" />} 
                   label="Total Team" 
                   value={userData.totalTeamCommissions} 
-                />
-                <StatCard 
-                  icon={<FiDollarSign className="text-blue-200" />} 
-                  label="Available" 
-                  value={userData.availableFunds} 
-                />
-                <StatCard 
-                  icon={<FiClock className="text-purple-200" />} 
-                  label="Pending" 
-                  value={userData.pendingFunds} 
                 />
               </div>
             </div>
@@ -549,6 +650,36 @@ const StatCard = ({ icon, label, value, highlight = false }: {
   </div>
 );
 
+// Enhanced AssetDetailCard with copy functionality
+const AssetDetailCard = ({ icon, label, value, bgColor, onCopy }: { 
+  icon: React.ReactNode; 
+  label: string; 
+  value: string;
+  bgColor: string;
+  onCopy?: () => void;
+}) => (
+  <div className={`${bgColor} p-4 rounded-lg relative`}>
+    <div className="flex items-center mb-2">
+      <div className="p-2 rounded-full bg-white shadow-sm mr-3">
+        {icon}
+      </div>
+      <h4 className="font-medium text-gray-800">{label}</h4>
+    </div>
+    <div className="flex justify-between items-end">
+      <p className="text-xl font-bold text-gray-900">{value}</p>
+      {onCopy && (
+        <button 
+          onClick={onCopy}
+          className="text-gray-400 hover:text-blue-500 p-1"
+          title="Copy value"
+        >
+          <FiCopy size={14} />
+        </button>
+      )}
+    </div>
+  </div>
+);
+
 const TabButton = ({ icon, label, active, onClick }: { 
   icon: React.ReactNode; 
   label: string; 
@@ -567,23 +698,6 @@ const TabButton = ({ icon, label, active, onClick }: {
     </div>
     <FiChevronRight className={`${active ? 'text-blue-500' : 'text-gray-400'}`} />
   </button>
-);
-
-const AssetDetailCard = ({ icon, label, value, bgColor }: { 
-  icon: React.ReactNode; 
-  label: string; 
-  value: string;
-  bgColor: string;
-}) => (
-  <div className={`${bgColor} p-4 rounded-lg`}>
-    <div className="flex items-center mb-2">
-      <div className="p-2 rounded-full bg-white shadow-sm mr-3">
-        {icon}
-      </div>
-      <h4 className="font-medium text-gray-800">{label}</h4>
-    </div>
-    <p className="text-xl font-bold text-gray-900">{value}</p>
-  </div>
 );
 
 export default ProfilePage;

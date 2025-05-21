@@ -19,7 +19,7 @@ function BannerSlider() {
     
     const interval = setInterval(() => {
       setCurrentBanner((prev) => (prev + 1) % banners.length);
-    }, 2000);
+    }, 4000);
     
     return () => clearInterval(interval);
   }, [isHovering]);
