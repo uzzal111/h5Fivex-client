@@ -37,7 +37,6 @@ const ProfilePage = () => {
     yesterdayTeamCommissions: 45.32,
     totalTeamCommissions: 320.45,
     vipChannel: 'VIP1Channel',
-    walletAddress: 'TNPdZ4pJcG9WJfVZ8Jk7vL5mRtNxY8zX9B'
   };
 
   const transactionHistory = [
@@ -147,7 +146,6 @@ const ProfilePage = () => {
                 label="Total Balance"
                 value={`${userData.balance.toFixed(2)} USDT`}
                 bgColor="bg-blue-50"
-                onCopy={() => handleCopy(userData.balance.toFixed(2), 'total-balance')}
               />
               <AssetDetailCard 
                 icon={<FiTrendingUp className="text-green-500" />}
@@ -198,32 +196,6 @@ const ProfilePage = () => {
                 bgColor="bg-purple-50"
                 onCopy={() => handleCopy(userData.totalTeamCommissions.toFixed(2), 'total-team-commissions')}
               />
-            </div>
-
-            {/* Wallet Address Section */}
-            <div className="mt-6 bg-gray-50 rounded-lg p-4 border border-gray-200">
-              <h4 className="font-medium text-gray-800 mb-3 flex items-center">
-                <FiKey className="text-blue-500 mr-2" />
-                Wallet Address
-              </h4>
-              <div className="flex items-center justify-between bg-white p-3 rounded-md border border-gray-300">
-                <p className="text-sm font-mono truncate">{userData.walletAddress}</p>
-                <button
-                  onClick={() => handleCopy(userData.walletAddress, 'wallet-address')}
-                  className="text-gray-500 hover:text-blue-600 ml-2 p-1 rounded-full hover:bg-gray-100 transition"
-                  title="Copy Wallet Address"
-                >
-                  {copiedItems['wallet-address'] ? (
-                    <FiCheck className="text-green-500" size={16} />
-                  ) : (
-                    <FiCopy size={16} />
-                  )}
-                </button>
-              </div>
-              <p className="text-xs text-gray-500 mt-2 flex items-start">
-                <FiInfo className="mr-1.5 mt-0.5 flex-shrink-0" />
-                <span>Only send USDT to this address. Sending other assets may result in permanent loss.</span>
-              </p>
             </div>
           </div>
         );
@@ -494,17 +466,7 @@ const ProfilePage = () => {
             {/* Total Balance Section */}
             <div className="flex justify-between items-center mb-4">
               <span className="text-sm font-medium">Total Balance (USDT)</span>
-              <button 
-                onClick={() => handleCopy(userData.balance.toFixed(2), 'total-balance')}
-                className="text-white/80 hover:text-white text-xs flex items-center"
-              >
-                {copiedItems['total-balance'] ? (
-                  <FiCheck className="mr-1 text-green-300" size={12} />
-                ) : (
-                  <FiCopy className="mr-1" size={12} />
-                )}
-                Copy
-              </button>
+              
             </div>
             <h2 className="text-3xl font-bold mb-6">{userData.balance.toFixed(2)}</h2>
             
