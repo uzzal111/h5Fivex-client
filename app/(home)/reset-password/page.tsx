@@ -63,7 +63,7 @@ export default function ResetPasswordPage() {
         className="w-full max-w-md bg-white/40 backdrop-blur-2xl rounded-3xl shadow-xl p-10 border border-white/30"
       >
         <div className="text-center mb-10">
-          <h1 className="text-3xl font-extrabold text-indigo-700 drop-shadow-md">BITNEX</h1>
+          <h1 className="text-3xl font-extrabold text-indigo-700 drop-shadow-md">h5Fivex</h1>
           <h2 className="text-xl font-bold text-indigo-700 drop-shadow-md">Reset Password</h2>
           <p className="text-gray-700 mt-2 text-sm">Enter your new password below</p>
         </div>

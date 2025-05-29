@@ -124,7 +124,7 @@ export default function SignupPage() {
         className="w-full max-w-md bg-white/40 backdrop-blur-2xl rounded-3xl shadow-xl p-10 border border-white/30"
       >
         <div className="text-center mb-10">
-          <h1 className="text-4xl font-extrabold text-indigo-700 drop-shadow-md">BITNEX</h1>
+          <h1 className="text-4xl font-extrabold text-indigo-700 drop-shadow-md">h5Fivex</h1>
           <h2 className="text-2xl font-extrabold text-indigo-700 drop-shadow-md">Create Account</h2>
           <p className="text-gray-700 mt-2 text-base">Join & Grow With Us 🌍</p>
         </div>
