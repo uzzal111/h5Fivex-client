@@ -17,8 +17,7 @@ function HomeFooter() {
         {/* Social Media Links */}
         <div className="flex justify-center gap-6 mb-8">
           <a
-            href="#"
-            target="_blank"
+            href="https://t.me/h5fivex"
             rel="noopener noreferrer"
             aria-label="Join us on Telegram"
             className="text-3xl text-blue-500 hover:text-blue-700 transform hover:scale-110 transition-all"
@@ -26,8 +25,8 @@ function HomeFooter() {
             <FaTelegramPlane />
           </a>
           <a
-            href="#"
-            target="_blank"
+            href="https://t.me/h5fivex"
+            target=""
             rel="noopener noreferrer"
             aria-label="Join us on WhatsApp"
             className="text-3xl text-green-500 hover:text-green-700 transform hover:scale-110 transition-all"
