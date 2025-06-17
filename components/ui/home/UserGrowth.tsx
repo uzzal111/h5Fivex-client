@@ -20,7 +20,7 @@ export default function UserGrowth() {
   ];
 
   useEffect(() => {
-    const storedCount = localStorage.getItem("bitnex_user_count");
+    const storedCount = localStorage.getItem("h5Fivex_user_count");
     if (storedCount) setUserCount(Number(storedCount));
 
     const interval = setInterval(() => {
@@ -29,7 +29,7 @@ export default function UserGrowth() {
           const added = Math.random() > 0.7 ? 2 : 1;
           const newCount = userCount + added;
           setUserCount(newCount);
-          localStorage.setItem("bitnex_user_count", newCount.toString());
+          localStorage.setItem("h5Fivex_user_count", newCount.toString());
           setJoinedFrom(countries[Math.floor(Math.random() * countries.length)]);
           return Math.floor(Math.random() * 10) + 5; // 5–15 sec
         }
@@ -80,7 +80,7 @@ export default function UserGrowth() {
         </p>
 
         <blockquote className="text-xs italic text-gray-500 mt-2">
-          "I joined Bitnex when we were 6k — now it’s booming!"
+          "I joined h5Fivex when we were 6k — now it’s booming!"
         </blockquote>
 
         {/* Avatars */}
@@ -100,7 +100,7 @@ export default function UserGrowth() {
       <div className="flex flex-col items-center space-y-3 mt-6 md:mt-0">
         <Globe2 className="text-sky-600 w-10 h-10 transition-all duration-300 transform hover:scale-110" />
         <div className="text-indigo-700 font-semibold text-center text-sm">
-          Be part of the global Bitnex eCommerce revolution.
+          Be part of the global h5Fivex eCommerce revolution.
         </div>
         <button
           onClick={handleJoinNowClick}

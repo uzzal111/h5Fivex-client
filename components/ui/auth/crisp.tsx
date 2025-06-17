@@ -7,7 +7,7 @@ const CrispChat = () => {
   useEffect(() => {
     // Initialize Crisp
     window.$crisp = [];
-    window.CRISP_WEBSITE_ID = "c0eba656-d32d-4db5-a99c-346afc39caad"; // Replace with your ID
+    window.CRISP_WEBSITE_ID = "05caebaf-e6b0-41b4-97e8-ed0b3adc712b"; // Replace with your ID
 
     // Create and inject custom CSS
     const style = document.createElement('style');

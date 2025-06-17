@@ -5,7 +5,7 @@ import React from "react";
 const CompanyOffersTicker = () => {
   const offers = [
     "🔥 h5Fivex Exclusive: 5% deposit commission on 100+ deposits • ",
-    "💎 Daily 1.8%-5% bonus on all investments • ",
+    "💎 Daily 2%-5% bonus on all investments • ",
     "🏆 Rank rewards: 100$-1000$ monthly bonus • ",
     "🚀 3-level referral generation bonus • ",
     "💰 Salary program: 100$-1000$ monthly • ",

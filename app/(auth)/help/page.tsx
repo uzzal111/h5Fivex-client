@@ -63,7 +63,7 @@ const HelpPage = () => {
     deposits: [
       {
         question: 'What payment methods can I use?',
-        answer: 'We accept USDT (TRC20/ERC20), bank transfers, and major credit cards. Minimum deposit is $10.'
+        answer: 'We accept USDT (TRC20/BEP20), bank transfers, and major credit cards. Minimum deposit is $10.'
       },
       {
         question: 'Why are deposits locked for 72 hours?',
@@ -81,7 +81,7 @@ const HelpPage = () => {
       },
       {
         question: 'How long do withdrawals take?',
-        answer: 'Processed within 24-48 hours after request. VIP members get priority processing.'
+        answer: 'Processed within 0-72 hours after request. VIP members get priority processing.'
       },
       {
         question: 'Why was my withdrawal rejected?',
@@ -95,7 +95,7 @@ const HelpPage = () => {
       },
       {
         question: 'What if I miss a day?',
-        answer: 'You can make up missed tasks within 7 days without penalty. After that, earnings may be paused.'
+        answer: 'You can make up missed tasks within 1 days without penalty. After that, earnings may be paused.'
       },
       {
         question: 'How do tasks affect my earnings?',
@@ -156,7 +156,7 @@ const HelpPage = () => {
       steps: [
         'Navigate to Wallet > Deposit',
         'Select payment method',
-        'Enter amount ($10 minimum)',
+        'Enter amount ($30 minimum)',
         'Complete payment verification'
       ],
       icon: <FiDollarSign className="text-blue-500" />
@@ -176,7 +176,7 @@ const HelpPage = () => {
       steps: [
         'Ensure 9+ completed tasks',
         'Go to Wallet > Withdraw',
-        'Enter amount ($20 minimum)',
+        'Enter amount ($30 minimum)',
         'Confirm via email/SMS'
       ],
       icon: <FiCreditCard className="text-purple-500" />

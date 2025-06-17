@@ -6,21 +6,21 @@ const testimonials = [
     name: "John Doe",
     position: "CEO, Tech Company",
     feedback:
-      "Bitnex transformed our eCommerce experience. The growth is phenomenal, and the user interface is intuitive and sleek. I highly recommend it!",
+      "h5Fivex transformed our eCommerce experience. The growth is phenomenal, and the user interface is intuitive and sleek. I highly recommend it!",
     avatar: "https://i.pravatar.cc/150?img=1",
   },
   {
     name: "Jane Smith",
     position: "Marketing Director, Fashion Co.",
     feedback:
-      "The ease of use and customization options on Bitnex make it the best platform I’ve used. The real-time data and user engagement are unbeatable.",
+      "The ease of use and customization options on h5Fivex make it the best platform I’ve used. The real-time data and user engagement are unbeatable.",
     avatar: "https://i.pravatar.cc/150?img=2",
   },
   {
     name: "Alex Johnson",
     position: "Founder, StartUp Hub",
     feedback:
-      "Bitnex is a game-changer! Our sales have increased by over 40%, and the user feedback has been overwhelmingly positive.",
+      "h5Fivex is a game-changer! Our sales have increased by over 40%, and the user feedback has been overwhelmingly positive.",
     avatar: "https://i.pravatar.cc/150?img=3",
   },
 ];

@@ -34,7 +34,7 @@ export default function FinancialRulesPage() {
               <ul className="space-y-2 text-sm text-gray-700">
                 <li className="flex items-start">
                   <FiCheckCircle className="text-green-500 mr-2 mt-0.5 flex-shrink-0" />
-                  Only USDT (TRC20 network) accepted
+                  Only USDT (BEP20 network) accepted
                 </li>
                 <li className="flex items-start">
                   <FiCheckCircle className="text-green-500 mr-2 mt-0.5 flex-shrink-0" />
@@ -124,7 +124,7 @@ export default function FinancialRulesPage() {
                 </li>
                 <li className="flex items-start">
                   <FiCheckCircle className="text-teal-500 mr-2 mt-0.5 flex-shrink-0" />
-                  Processed within 24 hours (USDT-TRC20)
+                  Processed within 0-72 hours (USDT-TRC20/BEP20)
                 </li>
               </ul>
             </div>
